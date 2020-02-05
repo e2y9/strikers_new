@@ -3,6 +3,9 @@ package commandline;
 public class TopTrumpsCLIApplication {
 
 	public static void main(String[] args) {
+//		TestLog test = new TestLog();
+		
+		
 		boolean userWantsToQuit = false;
 		
 		Players players = new Players();
@@ -19,7 +22,7 @@ public class TopTrumpsCLIApplication {
 		players.addPlayer(p5);
 		for(int i =0; i<players.getPlayers().size(); i++)
 		{
-			System.out.println("PLayer ID " + players.getPlayers().get(i).getPlayerID());
+			System.out.println("Player ID " + players.getPlayers().get(i).getPlayerID());
 		}
 
 		
