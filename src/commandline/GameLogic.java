@@ -10,7 +10,7 @@ public class GameLogic {
 	private Players playersList;
 	private DeckOfCards allCards;
 	private Player winnerOfRound;
-	private DeckOfCards commonPile;
+	private DeckOfCards drawPile;
 	private int totalNumberOfDraws = 0;
 	private static int gameId = 0;
 	
@@ -34,7 +34,6 @@ public class GameLogic {
 		
 	}
 	
-	//Check this method might be logically wrong.
 	 public void loadCards(FileReader fr) 
 	 {
 		    Scanner s = new Scanner(fr);
@@ -260,7 +259,20 @@ public class GameLogic {
 		}
 	}
 	
-	public DeckOfCards getCommonPile() {
-		return commonPile;
+	public DeckOfCards getDrawPile() {
+		return drawPile;
+	}
+	
+	public void addToDrawPile(Card card) {
+		this.drawPile.addCard(card);
+	}
+	
+	public void removeFromDrawPile(Card card) {
+		for (Card c : drawPile.getDeck()) {
+			if (card == c) {
+				drawPile.getDeck().remove(c);
+				break;
+			}
+		}
 	}
 }
