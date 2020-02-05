@@ -11,6 +11,7 @@ interface Player {
 	  public boolean getLost();
 	  public void setLost(boolean lost);
 	  public void incNumberOfDraws();
+	  public String topCard();
 	  
 }
 
