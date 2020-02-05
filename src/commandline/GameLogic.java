@@ -21,7 +21,7 @@ public class GameLogic {
 		allCards = new DeckOfCards();
 		try
 		{
-	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\MScIT_TeamProject_TemplateProject\\src\\commandline\\MarvelDeck.txt");
+	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\MScIT_TeamProject_TemplateProject\\strikers_new\\src\\commandline\\MarvelDeck.txt");
 	    	loadCards(fr);
 	    }
 		catch (FileNotFoundException e) 
