@@ -50,13 +50,13 @@ public class TestLog {
 	p1.getPlayerDeck().displayDeck();
 	System.out.println("\n--------------------\n");
 	// • The contents of the communal pile when cards are added or removed from it
-	Card testCard = new Card(); // *** need to add values to each card or they'll be null ***
-	Card testCard2 = new Card();
 	// // // // card values added // // // //
-	game.getCommonPile().addCard(testCard); // *** need to add a getCommonPile method to GameLogic ***
-	game.getCommonPile().addCard(testCard2);
-	game.getCommonPile().displayDeck();
-	game.getCommonPile().removeCard(testCard2);
+
+//	game.getCommonPile().addCard(p1.getPlayerDeck().getDeck().get(1));
+//	game.getCommonPile().addCard(p2.getPlayerDeck().getDeck().get(1));
+//	game.getCommonPile().displayDeck();
+//	game.getCommonPile().removeCard(p1.getPlayerDeck().getDeck().get(1));
+	
 	// • The contents of the current cards in play (the cards from the top of the user’s deck and the computer’s
 	// deck(s))
 	System.out.println(p1.topCard());
