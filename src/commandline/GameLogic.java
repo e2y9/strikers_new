@@ -259,4 +259,8 @@ public class GameLogic {
 			System.out.println(winnerOfRound.getPlayerDeck().getDeck().get(i).toString());
 		}
 	}
+	
+	public DeckOfCards getCommonPile() {
+		return commonPile;
+	}
 }
