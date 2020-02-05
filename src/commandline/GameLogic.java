@@ -34,7 +34,6 @@ public class GameLogic {
 		
 	}
 	
-	//Check this method might be logically wrong.
 	 public void loadCards(FileReader fr) 
 	 {
 		    Scanner s = new Scanner(fr);
