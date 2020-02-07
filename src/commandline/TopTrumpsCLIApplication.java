@@ -20,11 +20,11 @@ public class TopTrumpsCLIApplication {
 		
 		while (startGame == false)
 		{
-		System.out.println("\n= = = = = = = = = =");
+		System.out.println("\n= = = = = = = = = = =");
 		System.out.println("      GAME MENU      ");
 		System.out.println("1 : See Game Stats");
 		System.out.println("2 : Play a Game");
-		System.out.println("= = = = = = = = = =\n");
+		System.out.println("= = = = = = = = = = =\n");
 		System.out.println("\nEnter 1 or 2:\n");
 		Scanner s = new Scanner(System.in);
 		String choice = s.nextLine();
@@ -58,13 +58,13 @@ public class TopTrumpsCLIApplication {
 			
 			GameLogic game = new GameLogic(players);
 			
-			System.out.print("\n- - - - - - - - - -\nWelcome to Top Trumps!\n- - - - - - - - - -\n");
-			System.out.println("\n- - - - - - - - - -\nPlayer List:");
+			System.out.print("\n- - - - - - - - - - -\nWelcome to Top Trumps!\n- - - - - - - - - - -\n");
+			System.out.println("\n- - - - - - - - - - -\nPlayer List:");
 			for(int i =0; i<players.getPlayers().size(); i++) 
 			{
 				System.out.println(players.getPlayers().get(i).getName());	
 			}
-			System.out.println("- - - - - - - - - -\n");
+			System.out.println("- - - - - - - - - - -\n");
 			
 			if (startGame == false) 
 			{
@@ -73,7 +73,7 @@ public class TopTrumpsCLIApplication {
 			startGame = false;
 			game.shuffleDeck();
 			game.dealDeck();
-			System.out.println("\nWelcome to a new game!\n");
+			System.out.println("\n= = = = = = = = = = =\nWelcome to a new game!\n= = = = = = = = = = =\n");
 			
 		while(game.lastPlayerLeft() == false)
 		 {
@@ -92,7 +92,7 @@ public class TopTrumpsCLIApplication {
 			userWantsToQuit = false; 
 			}
 		}
-		System.out.println("\n- - - - - - - - - -\nThanks for playing!\n- - - - - - - - - -\n");
+		System.out.println("\n- - - - - - - - - - -\nThanks for playing!\n- - - - - - - - - - -\n");
 			
 
 	}
