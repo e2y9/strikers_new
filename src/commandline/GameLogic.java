@@ -14,6 +14,7 @@ public class GameLogic {
 	private int totalNumberOfDraws = 0;
 	private static int gameId = 0;
 	private int roundNumber = 1;
+	private boolean roundDrawn = false;
 	
 
 	public GameLogic(Players players)
@@ -22,7 +23,7 @@ public class GameLogic {
 		allCards = new DeckOfCards();
 		try
 		{
-	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\MScIT_TeamProject_TemplateProject\\strikers_new\\final_MarvelDeck.txt");
+	    	FileReader fr = new FileReader("src\\commandline\\final_MarvelDeck.txt");
 	    	loadCards(fr);
 	    }
 		catch (FileNotFoundException e) 
@@ -118,6 +119,7 @@ public class GameLogic {
 							{
 								System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
 								totalNumberOfDraws++;
+								roundDrawn = true;
 							}
 						}
 					}
@@ -125,7 +127,10 @@ public class GameLogic {
 				
 			}
 		}
+		if (roundDrawn == false)
+		{
 		winnerOfRound.incNumberOfRoundsWon();
+		}
 	}
 	
 	public void whoChooseCategory()
@@ -169,12 +174,21 @@ public class GameLogic {
 	
 	public void displayRoundWinners() 
 	{
-		 System.out.println("\n- - - - - - - - - -");	
+		if (roundDrawn == false)
+		{
+		 System.out.println("\n- - - - - - - - - - -");	
 		 for(int i =0; i<playersList.getPlayers().size(); i++)
 			{
 				System.out.println(playersList.getPlayers().get(i).getName() + " has won " + playersList.getPlayers().get(i).getNumberOfRoundsWon() + " rounds");
 			}
-		 System.out.println("- - - - - - - - - -\n");	
+		 System.out.println("- - - - - - - - - - -");
+		 System.out.println(totalNumberOfDraws + " rounds drawn");
+		 System.out.println("- - - - - - - - - - -\n");
+		} else
+		{
+			System.out.println(" ");
+			roundDrawn = false;
+		}
 	}
 	
 	public void displayUserDeckSize() 
@@ -273,8 +287,8 @@ public class GameLogic {
 		}
 		if(playerCount==1)
 		{
-			System.out.println("\n- - - - - - - - - -\nThe winner is: " 
-		+ winnerOfRound.getName() + "\n- - - - - - - - - -\n");
+			System.out.println("\n- - - - - - - - - - -\nThe winner is: " 
+		+ winnerOfRound.getName() + "\n- - - - - - - - - - -\n");
 			result = true;
 		}
 		return result;
@@ -311,7 +325,7 @@ public class GameLogic {
 	}
 	
 	public void displayRoundNumber() {
-		System.out.println("Round #" + roundNumber);
+		System.out.println("Round #" + roundNumber + " = = = = = =");
 		roundNumber++;
 	}
 }
