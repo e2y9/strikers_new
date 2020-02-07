@@ -2,6 +2,7 @@ package commandline;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -368,6 +369,50 @@ public class GameLogic {
 			}
 		}
 		deckPileWaiting = false;
+	}
+	
+	public ArrayList<String> getWinnerAttribute()
+	{
+		ArrayList<String> result = new ArrayList<String>(); 
+		
+		if(roundDrawn == false)
+		{
+			result.add(winnerOfRound.getName());
+			result.add(winnerCard.getName());
+			result.add(Integer.toString(winnerCard.getIntelligence()));
+			result.add(Integer.toString(winnerCard.getSpeed()));
+			result.add(Integer.toString(winnerCard.getStrength()));
+			result.add(Integer.toString(winnerCard.getAgility()));
+			result.add(Integer.toString(winnerCard.getCombat()));
+		}
+		
+		
+		return result;
+	}
+	
+	public ArrayList<String> getHumanPlayerTopCardAttributes()
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		if(playersList.getPlayers().get(0).getLost() == false)
+		{
+			result.add(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getName());
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getIntelligence()));
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getSpeed()));
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getStrength()));
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getAgility()));
+			result.add(Integer.toString(playersList.getPlayers().get(0).getPlayerDeck().getDeck().get(0).getCombat()));
+		}
+		
+		return result;
+	}
+	public ArrayList<Integer> getNumberOfCards()
+	{
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for(int i=0; i<playersList.getPlayers().size(); i++)	
+		{
+			result.add(playersList.getPlayers().get(i).getPlayerDeck().getNumberOfCards());
+		}
+		return result;				
 	}
 }
 
