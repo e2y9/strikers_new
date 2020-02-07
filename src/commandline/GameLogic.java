@@ -15,6 +15,7 @@ public class GameLogic {
 	private static int gameId = 0;
 	private int roundNumber = 1;
 	private boolean roundDrawn = false;
+	private boolean deckPileWaiting = false;
 	
 
 	public GameLogic(Players players)
@@ -108,14 +109,16 @@ public class GameLogic {
 							{
 								temp = this.getPlayersTopCardValue(i, category);
 								winnerOfRound = playersList.getPlayers().get(i);
+								roundDrawn = false;
 							}
 							
 							else if(this.getPlayersTopCardValue(i, category) < this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(j, category)>temp)
 							{
 								temp = this.getPlayersTopCardValue(i, category);
 								winnerOfRound = playersList.getPlayers().get(j);
+								roundDrawn = false;
 							}
-							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category))
+							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category) && (this.getPlayersTopCardValue(j, category) > temp == false) && (this.getPlayersTopCardValue(j, category) < temp == false))
 							{
 								System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
 								totalNumberOfDraws++;
@@ -187,7 +190,7 @@ public class GameLogic {
 		} else
 		{
 			System.out.println(" ");
-			roundDrawn = false;
+			deckPileWaiting = true;
 		}
 	}
 	
@@ -222,7 +225,7 @@ public class GameLogic {
 	public void transferCards()
 	{
 		int playersListSize = playersList.getPlayers().size();
-		int tempSize =0;
+		int tempSize = 0;
 		DeckOfCards temp = new DeckOfCards();
 		for(int i=0; i<playersListSize; i++)
 		{
@@ -235,6 +238,9 @@ public class GameLogic {
 		
 		this.shuffleHand(temp);
 		tempSize = temp.getDeck().size();
+		
+		if (roundDrawn == false)
+		{
 		for(int i=0; i<playersListSize; i++) //5
 		{
 			if(playersList.getPlayers().get(i).equals(winnerOfRound)) 
@@ -247,6 +253,15 @@ public class GameLogic {
 			}
 			
 		}
+		} 
+		else { 
+			for(int k=0; k<tempSize; k++)
+			{
+					drawPile.addCard(temp.getDeck().get(0));
+					temp.getDeck().remove(0);
+			}
+		}
+		dealDrawPile();
 	}
 	
 	public void shuffleHand(DeckOfCards cards)
@@ -328,4 +343,31 @@ public class GameLogic {
 		System.out.println("Round #" + roundNumber + " = = = = = =");
 		roundNumber++;
 	}
+	
+//	public void addToDrawPile()
+//	{
+//		if (roundDrawn == true)
+//		{
+//		for(int i=0; i<playersList.getPlayers().size(); i++)
+//		{
+//			if(playersList.getPlayers().get(i).getLost() == false)
+//			{
+//				drawPile.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
+//			}
+//		}
+//		}
+//	}
+//	
+	public void dealDrawPile()
+	{
+		if(roundDrawn == false && deckPileWaiting == true)
+		{
+			for(int i=0; i<drawPile.getDeck().size(); i++)
+			{
+				winnerOfRound.getPlayerDeck().getDeck().add(drawPile.getDeck().get(i));
+			}
+		}
+		deckPileWaiting = false;
+	}
 }
+
