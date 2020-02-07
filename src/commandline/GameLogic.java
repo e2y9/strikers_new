@@ -13,6 +13,7 @@ public class GameLogic {
 	private DeckOfCards drawPile;
 	private int totalNumberOfDraws = 0;
 	private static int gameId = 0;
+	private int roundNumber = 1;
 	
 
 	public GameLogic(Players players)
@@ -21,7 +22,7 @@ public class GameLogic {
 		allCards = new DeckOfCards();
 		try
 		{
-	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\MScIT_TeamProject_TemplateProject\\strikers_new\\src\\commandline\\MarvelDeck.txt");
+	    	FileReader fr = new FileReader("C:\\code\\_eclipse\\eclipse-workspace\\MScIT_TeamProject_TemplateProject\\strikers_new\\final_MarvelDeck.txt");
 	    	loadCards(fr);
 	    }
 		catch (FileNotFoundException e) 
@@ -40,8 +41,8 @@ public class GameLogic {
 		    // use nextLine to skip the first line
 		    s.nextLine();
 		    int counter = 0;
-		    while (counter < 10)
-		    { // only load 10 cards for demo
+		    while (counter < 40)
+		    { 
 		    	Card c = new Card();
 		        String line = s.nextLine();
 		        String[] values = line.split(" ");
@@ -59,6 +60,7 @@ public class GameLogic {
 		    }
 		    s.close();
 		}
+	 
 	public void dealDeck()
 	{
 		int deckPosition = 0;
@@ -75,7 +77,6 @@ public class GameLogic {
 	}
 	
 	
-	//Might throw a null pointer exception
 	public void shuffleDeck()
 	{
 		Random randomInteger = new Random();
@@ -115,7 +116,7 @@ public class GameLogic {
 							}
 							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category))
 							{
-								System.out.println("Its a draw case");
+								System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
 								totalNumberOfDraws++;
 							}
 						}
@@ -139,7 +140,7 @@ public class GameLogic {
 	
 	public String getWinnerOfRound()
 	{
-		return winnerOfRound.getName() + "\n" +  winnerOfRound.getPlayerDeck().getTopCard();
+		return winnerOfRound.getName() + " won the round with this card:\n" +  winnerOfRound.getPlayerDeck().getTopCard();
 	}
 	
 	public void displayAllPLayersTopCard()
@@ -156,10 +157,36 @@ public class GameLogic {
 		}
 	}
 	
+	public void displayUserTopCard()
+	{
+			if(playersList.getPlayers().get(0).getLost() == false) 
+			{
+				System.out.println("\n" + playersList.getPlayers().get(0).getName() + "'s current card:");
+				System.out.println(playersList.getPlayers().get(0).getPlayerDeck().getTopCard());
+				displayUserDeckSize();
+			}
+		}
+	
+	public void displayRoundWinners() 
+	{
+		 System.out.println("\n- - - - - - - - - -");	
+		 for(int i =0; i<playersList.getPlayers().size(); i++)
+			{
+				System.out.println(playersList.getPlayers().get(i).getName() + " has won " + playersList.getPlayers().get(i).getNumberOfRoundsWon() + " rounds");
+			}
+		 System.out.println("- - - - - - - - - -\n");	
+	}
+	
+	public void displayUserDeckSize() 
+	{
+		System.out.printf("%n" + playersList.getPlayers().get(0).getName() + " has " + playersList.getPlayers().get(0).getPlayerDeck().getDeck().size() + " cards in their deck");
+	}
+
+	
 	public void playRound()
 	{
 		roundWinner();
-		System.out.println("\n"+ getWinnerOfRound() + " won the round and will choose the category of next card");
+		System.out.println("\n\n" + getWinnerOfRound());
 	}
 	
 	public void lostPlayer()
@@ -177,7 +204,7 @@ public class GameLogic {
 		return playersList;
 	}
 	
-	//I think cards need to be shuffled before adding to winners deck
+
 	public void transferCards()
 	{
 		int playersListSize = playersList.getPlayers().size();
@@ -207,6 +234,7 @@ public class GameLogic {
 			
 		}
 	}
+	
 	public void shuffleHand(DeckOfCards cards)
 	{
 		Random randomInteger = new Random();
@@ -245,7 +273,8 @@ public class GameLogic {
 		}
 		if(playerCount==1)
 		{
-			System.out.println("We have a winner " + winnerOfRound.getName());
+			System.out.println("\n- - - - - - - - - -\nThe winner is: " 
+		+ winnerOfRound.getName() + "\n- - - - - - - - - -\n");
 			result = true;
 		}
 		return result;
@@ -259,20 +288,30 @@ public class GameLogic {
 		}
 	}
 	
-	public DeckOfCards getDrawPile() {
+	public DeckOfCards getDrawPile() 
+	{
 		return drawPile;
 	}
 	
-	public void addToDrawPile(Card card) {
+	public void addToDrawPile(Card card) 
+	{
 		this.drawPile.addCard(card);
 	}
 	
-	public void removeFromDrawPile(Card card) {
-		for (Card c : drawPile.getDeck()) {
-			if (card == c) {
+	public void removeFromDrawPile(Card card) 
+	{
+		for (Card c : drawPile.getDeck()) 
+		{
+			if (card == c) 
+			{
 				drawPile.getDeck().remove(c);
 				break;
 			}
 		}
+	}
+	
+	public void displayRoundNumber() {
+		System.out.println("Round #" + roundNumber);
+		roundNumber++;
 	}
 }
