@@ -11,10 +11,8 @@ public class TopTrumpsCLIApplication {
 		game.displayUserTopCard();
 		game.playRound();
 		game.transferCards();
-		// try to move dealer cards (if there is a game winner & deckPileWaiting = true), deal cards
 		game.lostPlayer();
 		game.displayRoundWinners();
-
 	}
 	
 	public static void gameMenu() {
@@ -41,15 +39,23 @@ public class TopTrumpsCLIApplication {
 	public static void main(String[] args) {
 				
 		boolean userWantsToQuit = false;
+		Players players;
+		Player p1;
+		Player p2;
+		Player p3;
+		Player p4;
+		Player p5;
+
+		GameLogic game;
 		
 		while (userWantsToQuit == false) 
 		{
-			Players players = new Players();
-			Player p1 = new HumanPlayer("User");
-			Player p2 = new CompPlayer("AI 1");
-			Player p3 = new CompPlayer("AI 2");
-			Player p4 = new CompPlayer("AI 3");
-			Player p5 = new CompPlayer("AI 4");
+			players = new Players();
+			p1 = new HumanPlayer("User");
+			p2 = new CompPlayer("AI 1");
+			p3 = new CompPlayer("AI 2");
+			p4 = new CompPlayer("AI 3");
+			p5 = new CompPlayer("AI 4");
 
 			players.addPlayer(p1);
 			players.addPlayer(p2);
@@ -57,7 +63,7 @@ public class TopTrumpsCLIApplication {
 			players.addPlayer(p4);
 			players.addPlayer(p5);
 			
-			GameLogic game = new GameLogic(players);
+			game = new GameLogic(players);
 			
 			System.out.print("\n- - - - - - - - - - -\nWelcome to Top Trumps!\n- - - - - - - - - - -\n");
 			System.out.println("\n- - - - - - - - - - -\nPlayer List:");
@@ -79,6 +85,10 @@ public class TopTrumpsCLIApplication {
 		while(game.lastPlayerLeft() == false)
 		 {
 			gameLoop(game);
+			if (game.lastPlayerLeft() == true) 
+			{
+			break;	
+			}
 		 }
 		System.out.println("Do you want to Quit the game? Type 0 to Quit, or 1 to continue");
 		Scanner s2 = new Scanner(System.in);
@@ -91,7 +101,7 @@ public class TopTrumpsCLIApplication {
 		else 
 		{ 
 			userWantsToQuit = false; 
-			}
+		}
 		}
 		System.out.println("\n- - - - - - - - - - -\nThanks for playing!\n- - - - - - - - - - -\n");
 			
