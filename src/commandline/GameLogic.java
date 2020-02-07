@@ -119,7 +119,7 @@ public class GameLogic {
 								winnerOfRound = playersList.getPlayers().get(j);
 								roundDrawn = false;
 							}
-							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category) && (this.getPlayersTopCardValue(j, category) > temp == false) && (this.getPlayersTopCardValue(j, category) < temp == false))
+							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category))
 							{
 								System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
 								totalNumberOfDraws++;
@@ -240,6 +240,7 @@ public class GameLogic {
 		this.shuffleHand(temp);
 		tempSize = temp.getDeck().size();
 		
+		// added if (rD == false)
 		if (roundDrawn == false)
 		{
 		for(int i=0; i<playersListSize; i++) //5
@@ -256,13 +257,14 @@ public class GameLogic {
 		}
 		} 
 		else { 
-			for(int k=0; k<tempSize; k++)
-			{
-					drawPile.addCard(temp.getDeck().get(0));
-					temp.getDeck().remove(0);
-			}
+			System.out.println("There was a draw but I can't move the cards yet.");
+//			for(int k=0; k<tempSize; k++)
+//			{
+//					drawPile.addCard(temp.getDeck().get(0));
+//					temp.getDeck().remove(0);
+//			}
 		}
-		dealDrawPile();
+//		dealDrawPile();
 	}
 	
 	public void shuffleHand(DeckOfCards cards)
@@ -372,24 +374,25 @@ public class GameLogic {
 		deckPileWaiting = false;
 	}
 	
-	public ArrayList<String> getWinnerAttribute()
-	{
-		ArrayList<String> result = new ArrayList<String>(); 
-		
-		if(roundDrawn == false)
-		{
-			result.add(winnerOfRound.getName());
-			result.add(winnerCard.getName());
-			result.add(Integer.toString(winnerCard.getIntelligence()));
-			result.add(Integer.toString(winnerCard.getSpeed()));
-			result.add(Integer.toString(winnerCard.getStrength()));
-			result.add(Integer.toString(winnerCard.getAgility()));
-			result.add(Integer.toString(winnerCard.getCombat()));
-		}
-		
-		
-		return result;
-	}
+	// muted this method while it waits for the winnerCard attribute
+//	public ArrayList<String> getWinnerAttribute()
+//	{
+//		ArrayList<String> result = new ArrayList<String>(); 
+//		
+//		if(roundDrawn == false)
+//		{
+//			result.add(winnerOfRound.getName());
+//			result.add(winnerCard.getName());
+//			result.add(Integer.toString(winnerCard.getIntelligence()));
+//			result.add(Integer.toString(winnerCard.getSpeed()));
+//			result.add(Integer.toString(winnerCard.getStrength()));
+//			result.add(Integer.toString(winnerCard.getAgility()));
+//			result.add(Integer.toString(winnerCard.getCombat()));
+//		}
+//		
+//		
+//		return result;
+//	}
 	
 	public ArrayList<String> getHumanPlayerTopCardAttributes()
 	{
