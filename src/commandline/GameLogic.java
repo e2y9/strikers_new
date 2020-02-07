@@ -353,7 +353,8 @@ public class GameLogic {
 //		{
 //			if(playersList.getPlayers().get(i).getLost() == false)
 //			{
-//				drawPile.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
+//			System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0)));
+//			drawPile.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
 //			}
 //		}
 //		}
