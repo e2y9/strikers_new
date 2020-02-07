@@ -11,7 +11,7 @@ public class GameLogic {
 	private Players playersList;
 	private DeckOfCards allCards;
 	private Player winnerOfRound;
-	private DeckOfCards drawPile;
+	private DeckOfCards drawPile = new DeckOfCards();
 	private int totalNumberOfDraws = 0;
 	private static int gameId = 0;
 	private int roundNumber = 1;
@@ -137,6 +137,9 @@ public class GameLogic {
 		}
 	}
 	
+
+	
+	
 	public void whoChooseCategory()
 	{
 		winnerOfRound.chooseCategory();
@@ -149,10 +152,17 @@ public class GameLogic {
 	
 	public String getWinnerOfRound()
 	{
+		if (roundDrawn == false)
+		{
 		return winnerOfRound.getName() + " won the round with this card:\n" +  winnerOfRound.getPlayerDeck().getTopCard();
+		}
+		else
+		{
+			return " ";
+		}
 	}
 	
-	public void displayAllPLayersTopCard()
+	public void displayAllPlayersTopCard()
 	{
 		int sizeOfList = playersList.getPlayers().size();
 		for(int i=0; i<sizeOfList; i++)
@@ -256,15 +266,21 @@ public class GameLogic {
 			
 		}
 		} 
-		else { 
-			System.out.println("There was a draw but I can't move the cards yet.");
-//			for(int k=0; k<tempSize; k++)
-//			{
-//					drawPile.addCard(temp.getDeck().get(0));
-//					temp.getDeck().remove(0);
-//			}
+		else if (roundDrawn == true)
+		{ 
+			for(int k=0; k<tempSize; k++)
+			{
+				if (temp.getDeck().get(k) != null)
+				{
+					drawPile.addCard(temp.getDeck().get(k));
+				}
+			}
+			for(int k=0; k<tempSize; k++)
+			{
+					temp.getDeck().remove(k);
+				}
 		}
-//		dealDrawPile();
+		dealDrawPile();
 	}
 	
 	public void shuffleHand(DeckOfCards cards)
