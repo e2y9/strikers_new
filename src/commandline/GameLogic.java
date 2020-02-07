@@ -275,10 +275,6 @@ public class GameLogic {
 					drawPile.addCard(temp.getDeck().get(k));
 				}
 			}
-			for(int k=0; k<tempSize; k++)
-			{
-					temp.getDeck().remove(k);
-				}
 		}
 		dealDrawPile();
 	}
