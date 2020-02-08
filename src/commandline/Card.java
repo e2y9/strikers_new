@@ -19,17 +19,19 @@ public class Card {
 		  cardValues = new int[5];
 	  }
 	  
-	  public void fillCard(String name, int intelligence, int speed, int strength, int agility, int combat) {
+	  public void fillCard(String name, int intelligence, int speed, int strength, int agility, int combat) 
+	  {
 		    this.name = name;
 		    this.cardValues[0] = intelligence;
 		    this.cardValues[1] = speed;
 		    this.cardValues[2] = strength;
 		    this.cardValues[3] = agility;
 		    this.cardValues[4] = combat;
-		  }
+		    }
 	  
 	  @Override
-	  public String toString() {
+	  public String toString() 
+	  {
 	    String card = String.format("%nName: %s%n%-13s : %d%n%-13s : %d%n%-13s : %d%n%-13s : %d%n%-13s : %d", 
 	    		this.name, this.cardCategories[0], this.cardValues[0],
 	    		this.cardCategories[1], this.cardValues[1], this.cardCategories[2], this.cardValues[2],

@@ -37,6 +37,8 @@ public class TopTrumpsCLIApplication {
 	}
 
 	public static void main(String[] args) {
+		
+		// TestLog test = new TestLog();
 				
 		boolean userWantsToQuit = false;
 		Players players;

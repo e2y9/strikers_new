@@ -18,7 +18,7 @@ public class DeckOfCards {
 	{ int i = 0;
 		for(Card element:deck)
 		{
-			System.out.println(element.toString() + "card " + i++);
+			System.out.println("\nCard Number #" + i++ + "\n" + element.toString());
 		}
 	}
 	
