@@ -40,6 +40,7 @@ public class TopTrumpsCLIApplication {
 	public static void main(String[] args) {
 				
 		boolean userWantsToQuit = false;
+		//commented the below part as we wont be creating players in the main anymore.
 //		Players players = new Players();
 //		Player p1 = new HumanPlayer("User");
 //		Player p2 = new CompPlayer("AI 1");
@@ -52,8 +53,8 @@ public class TopTrumpsCLIApplication {
 //		players.addPlayer(p3);
 //		players.addPlayer(p4);
 //		players.addPlayer(p5);
-		int numberOfPlayers = 5;
-		GameLogic game = new GameLogic(numberOfPlayers);
+		int numberOfPlayers = 5; //Added this line
+		GameLogic game = new GameLogic(numberOfPlayers);//edited this line 
 		
 		while (userWantsToQuit == false) 
 		{
@@ -61,9 +62,9 @@ public class TopTrumpsCLIApplication {
 			
 			System.out.print("\n- - - - - - - - - - -\nWelcome to Top Trumps!\n- - - - - - - - - - -\n");
 			System.out.println("\n- - - - - - - - - - -\nPlayer List:");
-			for(int i =0; i<numberOfPlayers; i++) 
+			for(int i =0; i<numberOfPlayers; i++) //edited this line 
 			{
-				System.out.println(game.getPlayersList().getPlayers().get(i).getName());	
+				System.out.println(game.getPlayersList().getPlayers().get(i).getName());	//edited this line 
 			}
 			System.out.println("- - - - - - - - - - -\n");
 			
@@ -93,9 +94,10 @@ public class TopTrumpsCLIApplication {
 			userWantsToQuit = false; 
 			}
 		}
-		connect(game);
+		connect(game); //added this line but comment it while testing because it will give a server connection error
 		System.out.println("\n- - - - - - - - - - -\nThanks for playing!\n- - - - - - - - - - -\n");
 	}
+	//added this method 
 	public static void connect(GameLogic game)
 	{
 		Connect c=new Connect();

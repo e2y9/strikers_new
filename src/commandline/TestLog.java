@@ -9,12 +9,12 @@ public class TestLog {
 	private DeckOfCards drawPile;
 	private int totalNumberOfDraws = 0;
 	private  int gameId = 0;
-	private int numberOfPlayers = 5;
+	private int numberOfPlayers = 5; //added this line 
 
 		public TestLog() {
 		
 		
-			GameLogic game = new GameLogic(numberOfPlayers);		
+			GameLogic game = new GameLogic(numberOfPlayers);	//edited this line 	
 		  
 
 	// In addition to the functionality described above, you should implement the following to allow for program debugging
@@ -42,15 +42,15 @@ public class TestLog {
 	// indicate which the user’s deck is and which the computer’s deck(s) is.
 	
 	System.out.println("\nUSER DECK:\n");
-	game.getPlayersList().getPlayers().get(0).getPlayerDeck().displayDeck();
+	game.getPlayersList().getPlayers().get(0).getPlayerDeck().displayDeck(); //edited this line 
 	System.out.println("\nCOMP1 DECK:\n");
-	game.getPlayersList().getPlayers().get(1).getPlayerDeck().displayDeck();
+	game.getPlayersList().getPlayers().get(1).getPlayerDeck().displayDeck(); //edited this line 
 	System.out.println("\nCOMP2 DECK:\n");
-	game.getPlayersList().getPlayers().get(2).getPlayerDeck().displayDeck();
+	game.getPlayersList().getPlayers().get(2).getPlayerDeck().displayDeck(); //edited this line 
 	System.out.println("\nCOMP3 DECK:\n");
-	game.getPlayersList().getPlayers().get(3).getPlayerDeck().displayDeck();
+	game.getPlayersList().getPlayers().get(3).getPlayerDeck().displayDeck(); //edited this line 
 	System.out.println("\nCOMP4 DECK:\n");
-	game.getPlayersList().getPlayers().get(4).getPlayerDeck().displayDeck();
+	game.getPlayersList().getPlayers().get(4).getPlayerDeck().displayDeck(); //edited this line 
 	System.out.println("\n--------------------\n");
 	
 	// • The contents of the communal pile when cards are added or removed from it
@@ -74,15 +74,15 @@ public class TestLog {
 	// • The contents of the current cards in play (the cards from the top of the user’s deck and the computer’s
 	// deck(s))
 	System.out.println("\nUSER TOP CARD:\n");
-	System.out.println(game.getPlayersList().getPlayers().get(0).topCard());
+	System.out.println(game.getPlayersList().getPlayers().get(0).topCard()); //edited this line 
 	System.out.println("\nCOMP1 TOP CARD:\n");
-	System.out.println(game.getPlayersList().getPlayers().get(1).topCard());
+	System.out.println(game.getPlayersList().getPlayers().get(1).topCard()); //edited this line 
 	System.out.println("\nCOMP2 TOP CARD:\n");
-	System.out.println(game.getPlayersList().getPlayers().get(2).topCard());
+	System.out.println(game.getPlayersList().getPlayers().get(2).topCard()); //edited this line 
 	System.out.println("\nCOMP3 TOP CARD:\n");
-	System.out.println(game.getPlayersList().getPlayers().get(3).topCard());
+	System.out.println(game.getPlayersList().getPlayers().get(3).topCard()); //edited this line 
 	System.out.println("\nCOMP4 TOP CARD:\n");
-	System.out.println(game.getPlayersList().getPlayers().get(4).topCard());
+	System.out.println(game.getPlayersList().getPlayers().get(4).topCard()); //edited this line 
 	
 	// • The category selected and corresponding values when a user or computer selects a category
 	
@@ -90,6 +90,8 @@ public class TestLog {
 	// same for computer
 	// compare values, print all card values to screen
 	
+	
+	//you will have to edit below lines too because there is no p1,p2 anymore
 	// p1.chooseCategory(); //v2 with no input
 	// p2.chooseCategory(); // special test versions that don't change the rest of the code?
 

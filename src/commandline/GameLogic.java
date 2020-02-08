@@ -18,13 +18,13 @@ public class GameLogic {
 	private boolean roundDrawn = false;
 	private boolean deckPileWaiting = false;
 	private Card winnerCard;
-	private int gameWinnerID = 0;
-	private int numOfPlayers;
+	private int gameWinnerID = 0; //Added this line
+	private int numOfPlayers; //Added this line
 	
-	public GameLogic(int numOfPlayers)
+	public GameLogic(int numOfPlayers)  //Changed this line
 	{
-		this.numOfPlayers = numOfPlayers;
-		playersList = new Players();
+		this.numOfPlayers = numOfPlayers; //Added this line
+		playersList = new Players(); //Changed this line
 		allCards = new DeckOfCards();
 		try
 		{
@@ -36,9 +36,9 @@ public class GameLogic {
 	      System.out.print("File not found.");
 	    }	
 		gameId++;
-		playersList.addPlayer(new HumanPlayer("User"));		
-		winnerOfRound = playersList.getPlayers().get(0);
-		for(int i=1; i<numOfPlayers; i++)
+		playersList.addPlayer(new HumanPlayer("User"));		//Added this line
+		winnerOfRound = playersList.getPlayers().get(0); // moved this line after gameId++
+		for(int i=1; i<numOfPlayers; i++)		//Added this loop
 		{
 			String name = "AI "+ i;
 			playersList.addPlayer(new CompPlayer(name));
@@ -127,6 +127,7 @@ public class GameLogic {
 								winnerOfRound = playersList.getPlayers().get(j);
 								roundDrawn = false;
 							}
+							//edited below line
 							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(i, category)>temp)
 							{
 								System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
@@ -263,11 +264,11 @@ public class GameLogic {
 		// added if (rD == false)
 		if (roundDrawn == false)
 		{
-		for(int i=0; i<playersListSize; i++) //5
+		for(int i=0; i<playersListSize; i++) 
 		{
 			if(playersList.getPlayers().get(i).equals(winnerOfRound)) 
 			{
-				for(int j=0; j<tempSize; j++) //5
+				for(int j=0; j<tempSize; j++) 
 				{
 					playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0));
 					temp.getDeck().remove(0);
@@ -327,7 +328,7 @@ public class GameLogic {
 		}
 		if(playerCount==1)
 		{
-			gameWinnerID = winnerOfRound.getPlayerID();
+			gameWinnerID = winnerOfRound.getPlayerID(); //Added this line
 			System.out.println("\n- - - - - - - - - - -\nThe winner is: " 
 		+ winnerOfRound.getName() + "\n- - - - - - - - - - -\n");
 			result = true;
@@ -396,8 +397,7 @@ public class GameLogic {
 		}
 		deckPileWaiting = false;
 	}
-	
-	// muted this method while it waits for the winnerCard attribute
+	//uncommented this method
 	public ArrayList<String> getWinnerAttribute()
 	{
 		ArrayList<String> result = new ArrayList<String>(); 
@@ -416,7 +416,7 @@ public class GameLogic {
 		
 		return result;
 	}
-	
+	//Added this method
 	public ArrayList<String> getHumanPlayerTopCardAttributes()
 	{
 		ArrayList<String> result = new ArrayList<String>();
@@ -432,7 +432,7 @@ public class GameLogic {
 		
 		return result;
 	}
-	
+	//Added this method
 	public ArrayList<Integer> getNumberOfCards()
 	{
 		ArrayList<Integer> result = new ArrayList<Integer>();
@@ -442,15 +442,15 @@ public class GameLogic {
 		}
 		return result;				
 	}
-	
+	//Added this method
 	public int getGameWinnerID() {
 		return gameWinnerID;
 	}
-
+	//Added this method
 	public int getRoundNumber() {
 		return roundNumber;
 	}
-	
+	//Added this method
 	public ArrayList<Integer> getAllPlayersID()
 	{
 		ArrayList<Integer> result = new ArrayList<Integer>();
@@ -460,7 +460,7 @@ public class GameLogic {
 		}
 		return result;
 	}
-	
+	//Added this method
 	public ArrayList<Integer> getnumberOfRoundsWonByEachPlayer()
 	{
 		ArrayList<Integer> result = new ArrayList<Integer>();
