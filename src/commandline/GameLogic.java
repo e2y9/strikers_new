@@ -286,30 +286,30 @@ public class GameLogic {
 		// added if (rD == false)
 		if (roundDrawn == false)
 		{
-		for(int i=0; i<playersListSize; i++) 
-		{
-			if(playersList.getPlayers().get(i).equals(winnerOfRound)) 
+			for(int i=0; i<playersListSize; i++) 
 			{
-				for(int j=0; j<tempSize; j++) 
+				if(playersList.getPlayers().get(i).equals(winnerOfRound)) 
 				{
-					playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0));
-					temp.getDeck().remove(0);
+					for(int j=0; j<tempSize; j++) 
+					{
+						playersList.getPlayers().get(i).getPlayerDeck().getDeck().add(temp.getDeck().get(0));
+						temp.getDeck().remove(0);
+					}
 				}
+				
 			}
-			
-		}
 		} 
 		else if (roundDrawn == true)
 		{ 
 			for(int k=0; k<tempSize; k++)
 			{
-				if (temp.getDeck().get(k) != null)
+				if (temp.getDeck().get(k) != null) // is it legal
 				{
 					drawPile.addCard(temp.getDeck().get(k));
 				}
 			}
 		}
-		dealDrawPile();
+		dealDrawPile(); //should it be called in the next round
 	}
 	
 	public void shuffleHand(DeckOfCards cards)
@@ -381,38 +381,11 @@ public class GameLogic {
 		this.drawPile.addCard(card);
 	}
 	
-	public void removeFromDrawPile(Card card) 
-	{
-		for (Card c : drawPile.getDeck()) 
-		{
-			if (card == c) 
-			{
-				drawPile.getDeck().remove(c);
-				break;
-			}
-		}
-	}
-	
 	public void displayRoundNumber() {
 		System.out.println("Round #" + roundNumber + " = = = = = =");
 		roundNumber++;
 	}
 	
-//	public void addToDrawPile()
-//	{
-//		if (roundDrawn == true)
-//		{
-//		for(int i=0; i<playersList.getPlayers().size(); i++)
-//		{
-//			if(playersList.getPlayers().get(i).getLost() == false)
-//			{
-//			System.out.println(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0)));
-//			drawPile.addCard(playersList.getPlayers().get(i).getPlayerDeck().getDeck().get(0));
-//			}
-//		}
-//		}
-//	}
-//	
 	public void dealDrawPile()
 	{
 		if(roundDrawn == false && deckPileWaiting == true)
@@ -423,6 +396,7 @@ public class GameLogic {
 			}
 		}
 		deckPileWaiting = false;
+		this.clearDrawPile();
 	}
 	//uncommented this method
 	public ArrayList<String> getWinnerAttribute()
@@ -505,5 +479,11 @@ public class GameLogic {
 	public void setOnlineCat(int onlineCat) {
 		this.onlineCat = onlineCat;
 	}
+	public void clearDrawPile()
+	{
+		while(drawPile.getDeck().isEmpty() == false)
+		{
+			drawPile.getDeck().remove(0);
+		}
+	}
 }
-
