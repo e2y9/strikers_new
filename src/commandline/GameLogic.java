@@ -13,15 +13,18 @@ public class GameLogic {
 	private Player winnerOfRound;
 	private DeckOfCards drawPile = new DeckOfCards();
 	private int totalNumberOfDraws = 0;
-	private static int gameId = 0;
+	private  int gameId = 0;
 	private int roundNumber = 1;
 	private boolean roundDrawn = false;
 	private boolean deckPileWaiting = false;
+	private Card winnerCard;
+	private int gameWinnerID = 0;
+	private int numOfPlayers;
 	
-
-	public GameLogic(Players players)
+	public GameLogic(int numOfPlayers)
 	{
-		this.playersList = players;
+		this.numOfPlayers = numOfPlayers;
+		playersList = new Players();
 		allCards = new DeckOfCards();
 		try
 		{
@@ -31,10 +34,15 @@ public class GameLogic {
 		catch (FileNotFoundException e) 
 		{
 	      System.out.print("File not found.");
-	    }
-		winnerOfRound = playersList.getPlayers().get(0);
-	
+	    }	
 		gameId++;
+		playersList.addPlayer(new HumanPlayer("User"));		
+		winnerOfRound = playersList.getPlayers().get(0);
+		for(int i=1; i<numOfPlayers; i++)
+		{
+			String name = "AI "+ i;
+			playersList.addPlayer(new CompPlayer(name));
+		}
 		
 	}
 	
@@ -119,7 +127,7 @@ public class GameLogic {
 								winnerOfRound = playersList.getPlayers().get(j);
 								roundDrawn = false;
 							}
-							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category))
+							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(i, category)>temp)
 							{
 								System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
 								totalNumberOfDraws++;
@@ -215,6 +223,7 @@ public class GameLogic {
 	{
 		roundWinner();
 		System.out.println("\n\n" + getWinnerOfRound());
+
 	}
 	
 	public void lostPlayer()
@@ -235,6 +244,7 @@ public class GameLogic {
 
 	public void transferCards()
 	{
+		winnerCard =  winnerOfRound.getPlayerDeck().getDeck().get(0);
 		int playersListSize = playersList.getPlayers().size();
 		int tempSize = 0;
 		DeckOfCards temp = new DeckOfCards();
@@ -295,7 +305,7 @@ public class GameLogic {
 		return totalNumberOfDraws;
 	}
 
-	public static int getGameId() {
+	public  int getGameId() {
 		return gameId;
 	}
 	
@@ -317,6 +327,7 @@ public class GameLogic {
 		}
 		if(playerCount==1)
 		{
+			gameWinnerID = winnerOfRound.getPlayerID();
 			System.out.println("\n- - - - - - - - - - -\nThe winner is: " 
 		+ winnerOfRound.getName() + "\n- - - - - - - - - - -\n");
 			result = true;
@@ -387,24 +398,24 @@ public class GameLogic {
 	}
 	
 	// muted this method while it waits for the winnerCard attribute
-//	public ArrayList<String> getWinnerAttribute()
-//	{
-//		ArrayList<String> result = new ArrayList<String>(); 
-//		
-//		if(roundDrawn == false)
-//		{
-//			result.add(winnerOfRound.getName());
-//			result.add(winnerCard.getName());
-//			result.add(Integer.toString(winnerCard.getIntelligence()));
-//			result.add(Integer.toString(winnerCard.getSpeed()));
-//			result.add(Integer.toString(winnerCard.getStrength()));
-//			result.add(Integer.toString(winnerCard.getAgility()));
-//			result.add(Integer.toString(winnerCard.getCombat()));
-//		}
-//		
-//		
-//		return result;
-//	}
+	public ArrayList<String> getWinnerAttribute()
+	{
+		ArrayList<String> result = new ArrayList<String>(); 
+		
+		if(roundDrawn == false)
+		{
+			result.add(winnerOfRound.getName());
+			result.add(winnerCard.getName());
+			result.add(Integer.toString(winnerCard.getIntelligence()));
+			result.add(Integer.toString(winnerCard.getSpeed()));
+			result.add(Integer.toString(winnerCard.getStrength()));
+			result.add(Integer.toString(winnerCard.getAgility()));
+			result.add(Integer.toString(winnerCard.getCombat()));
+		}
+		
+		
+		return result;
+	}
 	
 	public ArrayList<String> getHumanPlayerTopCardAttributes()
 	{
@@ -421,6 +432,7 @@ public class GameLogic {
 		
 		return result;
 	}
+	
 	public ArrayList<Integer> getNumberOfCards()
 	{
 		ArrayList<Integer> result = new ArrayList<Integer>();
@@ -429,6 +441,34 @@ public class GameLogic {
 			result.add(playersList.getPlayers().get(i).getPlayerDeck().getNumberOfCards());
 		}
 		return result;				
+	}
+	
+	public int getGameWinnerID() {
+		return gameWinnerID;
+	}
+
+	public int getRoundNumber() {
+		return roundNumber;
+	}
+	
+	public ArrayList<Integer> getAllPlayersID()
+	{
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for(int i = 0; i<playersList.getPlayers().size(); i++)
+		{
+			result.add(playersList.getPlayers().get(i).getPlayerID());
+		}
+		return result;
+	}
+	
+	public ArrayList<Integer> getnumberOfRoundsWonByEachPlayer()
+	{
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for(int i = 0; i<playersList.getPlayers().size(); i++)
+		{
+			result.add(playersList.getPlayers().get(i).getNumberOfRoundsWon());
+		}
+		return result;
 	}
 }
 

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class TopTrumpsCLIApplication {
 	
-	public static boolean startGame;
+	public static boolean startGame = false;
 	
 	public static void gameLoop(GameLogic game) {
 		game.displayRoundNumber();
@@ -14,7 +14,6 @@ public class TopTrumpsCLIApplication {
 		// try to move dealer cards (if there is a game winner & deckPileWaiting = true), deal cards
 		game.lostPlayer();
 		game.displayRoundWinners();
-
 	}
 	
 	public static void gameMenu() {
@@ -41,29 +40,30 @@ public class TopTrumpsCLIApplication {
 	public static void main(String[] args) {
 				
 		boolean userWantsToQuit = false;
+//		Players players = new Players();
+//		Player p1 = new HumanPlayer("User");
+//		Player p2 = new CompPlayer("AI 1");
+//		Player p3 = new CompPlayer("AI 2");
+//		Player p4 = new CompPlayer("AI 3");
+//		Player p5 = new CompPlayer("AI 4");
+
+//		players.addPlayer(p1);
+//		players.addPlayer(p2);
+//		players.addPlayer(p3);
+//		players.addPlayer(p4);
+//		players.addPlayer(p5);
+		int numberOfPlayers = 5;
+		GameLogic game = new GameLogic(numberOfPlayers);
 		
 		while (userWantsToQuit == false) 
 		{
-			Players players = new Players();
-			Player p1 = new HumanPlayer("User");
-			Player p2 = new CompPlayer("AI 1");
-			Player p3 = new CompPlayer("AI 2");
-			Player p4 = new CompPlayer("AI 3");
-			Player p5 = new CompPlayer("AI 4");
-
-			players.addPlayer(p1);
-			players.addPlayer(p2);
-			players.addPlayer(p3);
-			players.addPlayer(p4);
-			players.addPlayer(p5);
 			
-			GameLogic game = new GameLogic(players);
 			
 			System.out.print("\n- - - - - - - - - - -\nWelcome to Top Trumps!\n- - - - - - - - - - -\n");
 			System.out.println("\n- - - - - - - - - - -\nPlayer List:");
-			for(int i =0; i<players.getPlayers().size(); i++) 
+			for(int i =0; i<numberOfPlayers; i++) 
 			{
-				System.out.println(players.getPlayers().get(i).getName());	
+				System.out.println(game.getPlayersList().getPlayers().get(i).getName());	
 			}
 			System.out.println("- - - - - - - - - - -\n");
 			
@@ -93,9 +93,12 @@ public class TopTrumpsCLIApplication {
 			userWantsToQuit = false; 
 			}
 		}
+		connect(game);
 		System.out.println("\n- - - - - - - - - - -\nThanks for playing!\n- - - - - - - - - - -\n");
-			
-
 	}
-
+	public static void connect(GameLogic game)
+	{
+		Connect c=new Connect();
+		c.gamerecords(game.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
+	}
 }
