@@ -20,6 +20,7 @@ public class GameLogic {
 	private Card winnerCard;
 	private int gameWinnerID = 0; //Added this line
 	private int numOfPlayers; //Added this line
+	private int onlineCat;
 	
 	public GameLogic(int numOfPlayers)  //Changed this line
 	{
@@ -102,7 +103,17 @@ public class GameLogic {
 	
 	public void roundWinner()
 	{
-		int category = winnerOfRound.chooseCategory();
+		int category; 
+		if(onlineCat !=0 && winnerOfRound.equals(playersList.getPlayers().get(0)))
+		{
+			category = onlineCat;
+			onlineCat = 0;
+		}
+		else
+		{
+			category = winnerOfRound.chooseCategory();
+		}
+	
 		int temp = 0;
 		if(lastPlayerLeft() == false)
 		{
@@ -487,5 +498,12 @@ public class GameLogic {
 		return result;
 	}
 
+	public int getOnlineCat() {
+		return onlineCat;
+	}
+
+	public void setOnlineCat(int onlineCat) {
+		this.onlineCat = onlineCat;
+	}
 }
 

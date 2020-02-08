@@ -79,7 +79,7 @@ public class TopTrumpsCLIApplication {
 			game = new GameLogic(numberOfPlayers);
 		}
 		}
-		connect(game); //added this line but comment it while testing because it will give a server connection error
+//		connect(game); //added this line but comment it while testing because it will give a server connection error
 		System.out.println("\n- - - - - - - - - - -\nThanks for playing!\n- - - - - - - - - - -\n");
 	}
 	//added this method 
