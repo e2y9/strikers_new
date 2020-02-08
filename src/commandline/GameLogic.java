@@ -171,6 +171,17 @@ public class GameLogic {
 		}
 	}
 	
+	// for TestLog
+	public void setPlayerWinnerOfRound(Player p)
+	{
+		this.winnerOfRound = p;
+	}
+	
+	public Player getPlayerWinnerOfRound() 
+	{
+		return this.winnerOfRound;
+	}
+	
 	public void displayAllPlayersTopCard()
 	{
 		int sizeOfList = playersList.getPlayers().size();
@@ -308,6 +319,11 @@ public class GameLogic {
 
 	public  int getGameId() {
 		return gameId;
+	}
+	
+	public boolean getRoundDrawn()
+	{
+		return roundDrawn;
 	}
 	
 	public int getPlayersTopCardValue(int index,int category)
@@ -470,5 +486,6 @@ public class GameLogic {
 		}
 		return result;
 	}
+
 }
 
