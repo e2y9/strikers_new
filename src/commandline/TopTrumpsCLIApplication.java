@@ -39,27 +39,11 @@ public class TopTrumpsCLIApplication {
 
 	public static void main(String[] args) {
 				
-		boolean userWantsToQuit = false;
-		//commented the below part as we wont be creating players in the main anymore.
-//		Players players = new Players();
-//		Player p1 = new HumanPlayer("User");
-//		Player p2 = new CompPlayer("AI 1");
-//		Player p3 = new CompPlayer("AI 2");
-//		Player p4 = new CompPlayer("AI 3");
-//		Player p5 = new CompPlayer("AI 4");
-
-//		players.addPlayer(p1);
-//		players.addPlayer(p2);
-//		players.addPlayer(p3);
-//		players.addPlayer(p4);
-//		players.addPlayer(p5);
+		boolean userWantsToQuit = false;	
 		int numberOfPlayers = 5; //Added this line
-		GameLogic game = new GameLogic(numberOfPlayers);//edited this line 
-		
+		GameLogic game = new GameLogic(numberOfPlayers);//edited this line
 		while (userWantsToQuit == false) 
-		{
-			
-			
+		{		
 			System.out.print("\n- - - - - - - - - - -\nWelcome to Top Trumps!\n- - - - - - - - - - -\n");
 			System.out.println("\n- - - - - - - - - - -\nPlayer List:");
 			for(int i =0; i<numberOfPlayers; i++) //edited this line 
@@ -92,7 +76,8 @@ public class TopTrumpsCLIApplication {
 		else 
 		{ 
 			userWantsToQuit = false; 
-			}
+			game = new GameLogic(numberOfPlayers);
+		}
 		}
 		connect(game); //added this line but comment it while testing because it will give a server connection error
 		System.out.println("\n- - - - - - - - - - -\nThanks for playing!\n- - - - - - - - - - -\n");
