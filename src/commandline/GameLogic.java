@@ -21,6 +21,8 @@ public class GameLogic {
 	private int gameWinnerID = 0; //Added this line
 	private int numOfPlayers; //Added this line
 	private int onlineCat;
+	private int cat;
+	private Player previousWinner;
 	
 	public GameLogic(int numOfPlayers)  //Changed this line
 	{
@@ -39,6 +41,8 @@ public class GameLogic {
 		gameId++;
 		playersList.addPlayer(new HumanPlayer("User"));		//Added this line
 		winnerOfRound = playersList.getPlayers().get(0); // moved this line after gameId++
+		previousWinner = playersList.getPlayers().get(0);
+		
 		for(int i=1; i<numOfPlayers; i++)		//Added this loop
 		{
 			String name = "AI "+ i;
@@ -112,6 +116,7 @@ public class GameLogic {
 		else
 		{
 			category = winnerOfRound.chooseCategory();
+			cat = category;
 		}
 	
 		int temp = 0;
@@ -173,8 +178,8 @@ public class GameLogic {
 	public String getWinnerOfRound()
 	{
 		if (roundDrawn == false)
-		{
-		return winnerOfRound.getName() + " won the round with this card:\n" +  winnerOfRound.getPlayerDeck().getTopCard();
+		{		
+			return winnerOfRound.getName() + " won the round with this card:\n" +  winnerOfRound.getPlayerDeck().getTopCard();
 		}
 		else
 		{
@@ -227,7 +232,7 @@ public class GameLogic {
 				System.out.println(playersList.getPlayers().get(i).getName() + " has won " + playersList.getPlayers().get(i).getNumberOfRoundsWon() + " rounds");
 			}
 		 System.out.println("- - - - - - - - - - -");
-		 System.out.println(totalNumberOfDraws + " rounds drawn");
+		 System.out.println(totalNumberOfDraws + " rounds were draw");
 		 System.out.println("- - - - - - - - - - -\n");
 		} else
 		{
@@ -244,8 +249,11 @@ public class GameLogic {
 	
 	public void playRound()
 	{
+		
 		roundWinner();
+		System.out.println("\n" + previousWinner.getName() + " chose " + allCards.getDeck().get(0).getCategories(cat));
 		System.out.println("\n\n" + getWinnerOfRound());
+		previousWinner = winnerOfRound;
 
 	}
 	
@@ -484,6 +492,17 @@ public class GameLogic {
 		while(drawPile.getDeck().isEmpty() == false)
 		{
 			drawPile.getDeck().remove(0);
+		}
+	}
+	public boolean isWinnerAHuman()
+	{
+		if(winnerOfRound.equals(playersList.getPlayers().get(0)))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 }

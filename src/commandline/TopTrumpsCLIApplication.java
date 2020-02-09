@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class TopTrumpsCLIApplication {
 	
 	public static boolean startGame = false;
+	static Connect c=new Connect();
 	
 	public static void gameLoop(GameLogic game) {
 		game.displayRoundNumber();
@@ -31,6 +32,7 @@ public class TopTrumpsCLIApplication {
 		int choiceNum = Integer.parseInt(choice);
 		if (choiceNum == 1) {
 			System.out.println("Here are the game stats: ");
+			displayStats();
 		} else if (choiceNum == 2) {
 			startGame = true;
 		} else { System.out.println("Please choose either 1 or 2");}
@@ -65,6 +67,7 @@ public class TopTrumpsCLIApplication {
 		 {
 			gameLoop(game);
 		 }
+		connect(game); //added this line but comment it while testing because it will give a server connection error
 		System.out.println("Do you want to Quit the game? Type 0 to Quit, or 1 to continue");
 		Scanner s2 = new Scanner(System.in);
 		String quit = s2.nextLine();
@@ -79,13 +82,22 @@ public class TopTrumpsCLIApplication {
 			game = new GameLogic(numberOfPlayers);
 		}
 		}
-//		connect(game); //added this line but comment it while testing because it will give a server connection error
 		System.out.println("\n- - - - - - - - - - -\nThanks for playing!\n- - - - - - - - - - -\n");
 	}
 	//added this method 
 	public static void connect(GameLogic game)
 	{
-		Connect c=new Connect();
+		
 		c.gamerecords(game.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
+	}
+	
+	public static void displayStats()
+	{
+		System.out.println("-----------------------------------------------");
+		System.out.println("Total number of Games played: " + c.numberOfGames());
+		System.out.println("Number of Human wins: " + c.numberofHumanWin());
+		System.out.println("Number of AI wins: " + c.numberofAIwin());
+		System.out.println("Average number of Draws: " + c.averageOfDraws());
+		System.out.println("Longest Game: " + c.maxRoundInGame() + " rounds");
 	}
 }

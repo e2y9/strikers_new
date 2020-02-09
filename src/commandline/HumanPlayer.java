@@ -22,7 +22,10 @@ public class HumanPlayer implements Player {
 	@Override
 	  public int chooseCategory() {
 		  int catNum = 0;
-		  try {
+		  Scanner s = new Scanner(System.in);
+		  boolean inputValidity = false;
+		  do
+		  {
 			  System.out.println("\n\n- - - - - - - - - -\n\nWhich category would you like to choose?\n");
 			  System.out.println("1 - Intelligence");
 			  System.out.println("2 - Speed");
@@ -30,15 +33,19 @@ public class HumanPlayer implements Player {
 			  System.out.println("4 - Agility");
 			  System.out.println("5 - Combat");
 			  System.out.println("");
-			  Scanner s = new Scanner(System.in);
 			  String category = s.nextLine();
 			  catNum = Integer.parseInt(category);
-			  // array starts at 0, above list starts at 1, so -1
 			  catNum--;
-		  } catch (ArrayIndexOutOfBoundsException e) {
-			  System.out.println("Please enter a number between 1 and 5.");
-		  }
-		  
+			  if(catNum >= 0 && catNum <=4)
+			  {
+				  inputValidity = true;
+			  }
+			  else
+			  {
+				  System.out.println("Please enter a number between 1 and 5.");
+				  inputValidity = false;
+			  }
+		  }while(inputValidity==false);
 		  return catNum;
 	  }
 	

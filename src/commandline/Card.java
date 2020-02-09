@@ -86,8 +86,8 @@ public class Card {
 	    return this.cardCategories[4];
 	  }
 
-	  public String[] getCategories() {
-	    return cardCategories;
+	  public String getCategories(int index) {
+	    return cardCategories[index];
 	  }
 
 	  public int[] getValues() {
