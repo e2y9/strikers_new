@@ -317,7 +317,7 @@ public class TopTrumpsTestLog {
         {
             gameLoop(game);
         }
-        int gameWinnerID = 0;
+        int gameWinnerID = game.getGameWinnerID();
 
         if (gameWinnerID == 0)
         {
@@ -327,13 +327,13 @@ public class TopTrumpsTestLog {
             fw.write("\n\nGAME OVER\n\nThe Winner is: AI 1");
         } else if (gameWinnerID == 2)
         {
-            fw.write("\n\nGAME OVER\n\nThe Winner is: AI 1");
+            fw.write("\n\nGAME OVER\n\nThe Winner is: AI 2");
         } else if (gameWinnerID == 3)
         {
-            fw.write("\n\nGAME OVER\n\nThe Winner is: AI 1");
+            fw.write("\n\nGAME OVER\n\nThe Winner is: AI 3");
         } else if (gameWinnerID == 4)
         {
-            fw.write("\n\nGAME OVER\n\nThe Winner is: AI 1");
+            fw.write("\n\nGAME OVER\n\nThe Winner is: AI 4");
         }
 
     fw.close();
