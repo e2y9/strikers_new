@@ -505,4 +505,9 @@ public class GameLogic {
 			return false;
 		}
 	}
+	
+	public Deck getAllCards() 
+	{
+		return allCards;
+	}
 }
