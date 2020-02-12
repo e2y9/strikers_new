@@ -505,4 +505,18 @@ public class GameLogic {
 			return false;
 		}
 	}
+	public int getNumberOfCardsCommunalPile()
+	{
+		return drawPile.getNumberOfCards();
+	}
+	
+	public int getNumberOfTotalRounds()
+	{
+		return roundNumber;
+	}
+
+	public DeckOfCards getAllCards() {
+		return allCards;
+	}
+	
 }

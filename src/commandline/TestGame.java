@@ -26,20 +26,9 @@ public class TestGame {
 
 
     public TestGame() throws IOException {
-        Players players = new Players();
-        Player p1 = new HumanPlayer("User");
-        Player p2 = new CompPlayer("AI 1");
-        Player p3 = new CompPlayer("AI 2");
-        Player p4 = new CompPlayer("AI 3");
-        Player p5 = new CompPlayer("AI 4");
+    	int numberOfPlayers = 5;
 
-        players.addPlayer(p1);
-        players.addPlayer(p2);
-        players.addPlayer(p3);
-        players.addPlayer(p4);
-        players.addPlayer(p5);
-
-        GameLogic game = new GameLogic(players);
+        GameLogic game = new GameLogic(numberOfPlayers);
 
 
         // In addition to the functionality described above, you should implement the following to allow for program debugging
@@ -88,7 +77,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n User Deck:\n");
-            for (Card c : p1.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(0).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -98,7 +87,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n AI 1 Deck:\n");
-            for (Card c : p2.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(1).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -108,7 +97,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n AI 2 Deck:\n");
-            for (Card c : p3.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(2).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -118,7 +107,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n AI 3 Deck:\n");
-            for (Card c : p4.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(3).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -128,7 +117,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n AI 4 Deck:\n");
-            for (Card c : p5.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(4).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -176,25 +165,25 @@ public class TestGame {
         // • The contents of the current cards in play (the cards from the top of the user’s deck and the computer’s
         // deck(s))
         fw.write("\nUSER TOP CARD:\n");
-        fw.write(p1.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(0).topCard());
         fw.write("\n\nAI 1 TOP CARD:\n");
-        fw.write(p2.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(1).topCard());
         fw.write("\n\nAI 2 TOP CARD:\n");
-        fw.write(p3.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(2).topCard());
         fw.write("\n\nAI 3 TOP CARD:\n");
-        fw.write(p4.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(3).topCard());
         fw.write("\n\nAI 4 TOP CARD:\n");
-        fw.write(p5.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(4).topCard());
         fw.write("\n--------------------\n");
 
         fw.write("\nAI 1 TOP CARD:\n");
-        fw.write(p2.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(1).topCard());
 
-        int displayCategory = p2.chooseCategory();
-        int userValue = p1.getPlayerDeck().getTopCardValue(displayCategory);
-        int ai2Value = p3.getPlayerDeck().getTopCardValue(displayCategory);
-        int ai3Value = p4.getPlayerDeck().getTopCardValue(displayCategory);
-        int ai4Value = p5.getPlayerDeck().getTopCardValue(displayCategory);
+        int displayCategory =game.getPlayersList().getPlayers().get(1).chooseCategory();
+        int userValue = game.getPlayersList().getPlayers().get(0).getPlayerDeck().getTopCardValue(displayCategory);
+        int ai2Value = game.getPlayersList().getPlayers().get(2).getPlayerDeck().getTopCardValue(displayCategory);
+        int ai3Value = game.getPlayersList().getPlayers().get(3).getPlayerDeck().getTopCardValue(displayCategory);
+        int ai4Value = game.getPlayersList().getPlayers().get(4).getPlayerDeck().getTopCardValue(displayCategory);
 
         // category value index starts at 0, category choice starts at 1
         // so +=1 will show correct category number to screen
@@ -229,13 +218,13 @@ public class TestGame {
 
         fw.write("\n\nOther users' top cards:\n");
         fw.write("\nUSER TOP CARD:\n");
-        fw.write(p1.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(0).topCard());
         fw.write("\n\nAI 2 TOP CARD:\n");
-        fw.write(p3.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(2).topCard());
         fw.write("\n\nAI 3 TOP CARD:\n");
-        fw.write(p4.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(3).topCard());
         fw.write("\n\nAI 4 TOP CARD:\n");
-        fw.write(p5.topCard());
+        fw.write(game.getPlayersList().getPlayers().get(4).topCard());
         fw.write("\n--------------------\n");
 
         // • The contents of each deck after a round
@@ -264,7 +253,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n User Deck:\n");
-            for (Card c : p1.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(0).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -274,7 +263,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n AI 1 Deck:\n");
-            for (Card c : p2.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(1).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -284,7 +273,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n AI 2 Deck:\n");
-            for (Card c : p3.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(2).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -294,7 +283,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n AI 3 Deck:\n");
-            for (Card c : p4.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(3).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
@@ -304,7 +293,7 @@ public class TestGame {
         try
         {
             fw.write("\n\n AI 4 Deck:\n");
-            for (Card c : p5.getPlayerDeck().getDeck())
+            for (Card c : game.getPlayersList().getPlayers().get(4).getPlayerDeck().getDeck())
             {
                 fw.write("\n" + c.toString());
             }
