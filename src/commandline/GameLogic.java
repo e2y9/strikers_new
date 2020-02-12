@@ -13,7 +13,7 @@ public class GameLogic {
 	private Player winnerOfRound;
 	private DeckOfCards drawPile = new DeckOfCards();
 	private int totalNumberOfDraws = 0;
-	private  int gameId = 0;
+	private static int gameId = 0;
 	private int roundNumber = 1;
 	private boolean roundDrawn = false;
 	private boolean deckPileWaiting = false;
@@ -38,7 +38,6 @@ public class GameLogic {
 		{
 	      System.out.print("File not found.");
 	    }	
-		gameId++;
 		playersList.addPlayer(new HumanPlayer("User"));		//Added this line
 		winnerOfRound = playersList.getPlayers().get(0); // moved this line after gameId++
 		previousWinner = playersList.getPlayers().get(0);
@@ -115,8 +114,16 @@ public class GameLogic {
 		}
 		else
 		{
-			category = winnerOfRound.chooseCategory();
-			cat = category;
+			if(roundDrawn == false)
+			{
+				category = winnerOfRound.chooseCategory();
+				cat = category;
+			}
+			else
+			{
+				category = previousWinner.chooseCategory();
+			}
+		
 		}
 	
 		int temp = 0;
@@ -158,8 +165,9 @@ public class GameLogic {
 		}
 		if (roundDrawn == false)
 		{
-		winnerOfRound.incNumberOfRoundsWon();
+			winnerOfRound.incNumberOfRoundsWon();
 		}
+		roundNumber++;
 	}
 	
 
@@ -249,7 +257,6 @@ public class GameLogic {
 	
 	public void playRound()
 	{
-		
 		roundWinner();
 		System.out.println("\n" + previousWinner.getName() + " chose " + allCards.getDeck().get(0).getCategories(cat));
 		System.out.println("\n\n" + getWinnerOfRound());
@@ -336,8 +343,8 @@ public class GameLogic {
 		return totalNumberOfDraws;
 	}
 
-	public  int getGameId() {
-		return gameId;
+	public static int getGameId() {
+		return GameLogic.gameId;
 	}
 	
 	public boolean getRoundDrawn()
@@ -391,7 +398,7 @@ public class GameLogic {
 	
 	public void displayRoundNumber() {
 		System.out.println("Round #" + roundNumber + " = = = = = =");
-		roundNumber++;
+//		roundNumber++;
 	}
 	
 	public void dealDrawPile()
@@ -512,11 +519,14 @@ public class GameLogic {
 	
 	public int getNumberOfTotalRounds()
 	{
-		return roundNumber;
+		return roundNumber+1;
 	}
 
 	public DeckOfCards getAllCards() {
 		return allCards;
 	}
-	
+	public static void incGameID()
+	{
+		GameLogic.gameId++;
+	}	
 }

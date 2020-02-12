@@ -1,5 +1,6 @@
 package commandline;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class TopTrumpsCLIApplication {
@@ -17,8 +18,9 @@ public class TopTrumpsCLIApplication {
 		game.displayRoundWinners();
 	}
 	
-	public static void gameMenu() {
+	public static void gameMenu(){
 		
+//		TestLog test = new TestLog();
 		while (startGame == false)
 		{
 		System.out.println("\n= = = = = = = = = = =");
@@ -39,7 +41,7 @@ public class TopTrumpsCLIApplication {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 				
 		boolean userWantsToQuit = false;	
 		int numberOfPlayers = 5; //Added this line
@@ -59,6 +61,9 @@ public class TopTrumpsCLIApplication {
 			gameMenu();
 			}
 			startGame = false;
+//			game.setGameId(4 + 1);  //read from data base
+			GameLogic.incGameID();
+			System.out.println("GameID: " + GameLogic.getGameId());
 			game.shuffleDeck();
 			game.dealDeck();
 			System.out.println("\n= = = = = = = = = = =\nWelcome to a new game!\n= = = = = = = = = = =\n");
@@ -67,7 +72,7 @@ public class TopTrumpsCLIApplication {
 		 {
 			gameLoop(game);
 		 }
-		connect(game); //added this line but comment it while testing because it will give a server connection error
+//		connect(game); //added this line but comment it while testing because it will give a server connection error
 		System.out.println("Do you want to Quit the game? Type 0 to Quit, or 1 to continue");
 		Scanner s2 = new Scanner(System.in);
 		String quit = s2.nextLine();
@@ -88,7 +93,7 @@ public class TopTrumpsCLIApplication {
 	public static void connect(GameLogic game)
 	{
 		
-		c.gamerecords(game.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
+		c.gamerecords(GameLogic.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
 	}
 	
 	public static void displayStats()

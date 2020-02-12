@@ -1,13 +1,18 @@
 import commandline.TopTrumpsCLIApplication;
 
+import java.io.IOException;
+
+import commandline.TestLog;
+
 import online.TopTrumpsOnlineApplication;
 
 
 
 public class TopTrumps {
 
-	/** This is the main class for the TopTrumps Applications */
-	public static void main(String[] args) {
+	/** This is the main class for the TopTrumps Applications 
+	 * @throws IOException */
+	public static void main(String[] args) throws IOException {
 		
 		System.out.println("--------------------");
 		System.out.println("--- Top Trumps   ---");
@@ -38,10 +43,14 @@ public class TopTrumps {
 			// Start the online application
 			String[] commandArgs = {"server", "TopTrumps.json"};
 			TopTrumpsOnlineApplication.main(commandArgs);
-		} else if (commandLineMode) {
+		} else if (commandLineMode && printTestLog == false) {
 			// Start the command line application
 			String[] commandArgs = {String.valueOf(printTestLog)};
 			TopTrumpsCLIApplication.main(commandArgs);
+		}
+		else if(commandLineMode && printTestLog)
+		{
+			TestLog test = new TestLog();
 		}
 		
 	}

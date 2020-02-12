@@ -14,7 +14,7 @@ public class Connect{
     public Connect() {
     	//Connecting to yacata server for postgresql database
     	try {
-    		connection=DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/", "m_19_2500372d", "2500372d");
+    		connection=DriverManager.getConnection("jdbc:postgresql://52.24.215.108:5432/", "Strikers", "Strikers");
     		statement = connection.createStatement();
     	} catch (SQLException e) { 
     	    System.out.println("Connection failure.");
@@ -117,7 +117,7 @@ public class Connect{
        public int maxRoundInGame() {
     	   
     	   try {
-    	     	   ResultSet resultSet = statement.executeQuery("SELECT MAX(gameplay.rounds) as MaxRound FROM gameplay");
+    	     	   ResultSet resultSet = statement.executeQuery("SELECT MAX(gameplay.total_rounds) as MaxRound FROM gameplay");
     	     	   resultSet.next();
     	     	   return resultSet.getInt("MaxRound");
     	   } catch (SQLException e) {
