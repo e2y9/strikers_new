@@ -151,7 +151,7 @@ public class GameLogic {
 								roundDrawn = false;
 							}
 							//edited below line
-							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(i, category)>temp)
+							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(i, category)<temp)
 							{
 								System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
 								totalNumberOfDraws++;
@@ -163,7 +163,7 @@ public class GameLogic {
 				
 			}
 		}
-		if (roundDrawn == false)
+		if(roundDrawn == false)
 		{
 			winnerOfRound.incNumberOfRoundsWon();
 		}

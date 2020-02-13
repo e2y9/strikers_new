@@ -22,7 +22,7 @@ public class HumanPlayer implements Player {
 	@Override
 	  public int chooseCategory() {
 		  int catNum = 0;
-		  Scanner s = new Scanner(System.in);
+		  Scanner s1 = new Scanner(System.in);
 		  boolean inputValidity = false;
 		  do
 		  {
@@ -33,19 +33,28 @@ public class HumanPlayer implements Player {
 			  System.out.println("4 - Agility");
 			  System.out.println("5 - Combat");
 			  System.out.println("");
-			  String category = s.nextLine();
-			  catNum = Integer.parseInt(category);
-			  catNum--;
-			  if(catNum >= 0 && catNum <=4)
+			  if(s1.hasNextInt())
 			  {
-				  inputValidity = true;
-			  }
+				  catNum = s1.nextInt();
+				  catNum--;
+				  if(catNum >= 0 && catNum <=4)
+				  {
+					  inputValidity = true;
+				  }
+				  else
+				  {
+					  System.out.println("Please enter a number between 1 and 5.");
+					  inputValidity = false;
+				  }
+			  	}
 			  else
 			  {
 				  System.out.println("Please enter a number between 1 and 5.");
 				  inputValidity = false;
+				  s1.nextLine();
 			  }
-		  }while(inputValidity==false);
+			}while(inputValidity==false);
+			  
 		  return catNum;
 	  }
 	

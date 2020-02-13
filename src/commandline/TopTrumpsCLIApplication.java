@@ -23,21 +23,34 @@ public class TopTrumpsCLIApplication {
 //		TestLog test = new TestLog();
 		while (startGame == false)
 		{
-		System.out.println("\n= = = = = = = = = = =");
-		System.out.println("      GAME MENU      ");
-		System.out.println("1 : See Game Stats");
-		System.out.println("2 : Play a Game");
-		System.out.println("= = = = = = = = = = =\n");
-		System.out.println("\nEnter 1 or 2:\n");
-		Scanner s = new Scanner(System.in);
-		String choice = s.nextLine();
-		int choiceNum = Integer.parseInt(choice);
-		if (choiceNum == 1) {
-			System.out.println("Here are the game stats: ");
-			displayStats();
-		} else if (choiceNum == 2) {
-			startGame = true;
-		} else { System.out.println("Please choose either 1 or 2");}
+			System.out.println("\n= = = = = = = = = = =");
+			System.out.println("      GAME MENU      ");
+			System.out.println("1 : See Game Stats");
+			System.out.println("2 : Play a Game");
+			System.out.println("= = = = = = = = = = =\n");
+			System.out.println("\nEnter 1 or 2:\n");
+			Scanner s = new Scanner(System.in);			
+			if(s.hasNextInt())
+			{
+				int choiceNum= s.nextInt();
+				if (choiceNum == 1) 
+				{
+					System.out.println("Here are the game stats: ");
+					displayStats();
+				} 
+				else if (choiceNum == 2)
+				{
+					startGame = true;
+				} 
+				else 
+				{
+					System.out.println("Please choose either 1 or 2");
+				}
+			}
+			else
+			{
+				 System.out.println("Please choose either 1 or 2");
+			}
 		}
 	}
 
