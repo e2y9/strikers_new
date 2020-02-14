@@ -117,7 +117,7 @@ public class TopTrumpsCLIApplication {
 		System.out.println("Total number of Games played: " + c.numberOfGames());
 		System.out.println("Number of Human wins: " + c.numberofHumanWin());
 		System.out.println("Number of AI wins: " + c.numberofAIwin());
-		System.out.println("Average number of Draws: " + c.averageOfDraws());
+		System.out.printf("Average number of Draws: %.2f\n", c.averageOfDraws());
 		System.out.println("Longest Game: " + c.maxRoundInGame() + " rounds");
 	}
 }
