@@ -13,7 +13,7 @@ public class GameLogic {
 	private Player winnerOfRound;
 	private DeckOfCards drawPile = new DeckOfCards();
 	private int totalNumberOfDraws = 0;
-	private static int gameId = 0;
+	private int gameId = 0;
 	private int roundNumber = 1;
 	private boolean roundDrawn = false;
 	private boolean deckPileWaiting = false;
@@ -373,8 +373,8 @@ public class GameLogic {
 		return totalNumberOfDraws;
 	}
 
-	public static int getGameId() {
-		return GameLogic.gameId;
+	public int getGameId() {
+		return gameId;
 	}
 	
 	public boolean getRoundDrawn()
@@ -549,14 +549,14 @@ public class GameLogic {
 	
 	public int getNumberOfTotalRounds()
 	{
-		return roundNumber+1;
+		return roundNumber;
 	}
 
 	public DeckOfCards getAllCards() {
 		return allCards;
 	}
-	public static void incGameID()
-	{
-		GameLogic.gameId++;
-	}	
+
+	public void setGameId(int gameId) {
+		this.gameId = gameId;
+	}
 }

@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 public class TopTrumpsCLIApplication {
 	
-	public static boolean startGame = false;
-	static Connect c=new Connect();
+	public boolean startGame = false;
+	Connect c=new Connect();
 	
-	public static void gameLoop(GameLogic game) {
+	
+	public void gameLoop(GameLogic game) {
 		game.displayRoundNumber();
 		game.displayUserTopCard();
 		game.playRound();
@@ -18,7 +19,7 @@ public class TopTrumpsCLIApplication {
 		game.displayRoundWinners();
 	}
 	
-	public static void gameMenu(){
+	public void gameMenu(){
 		
 //		TestLog test = new TestLog();
 		while (startGame == false)
@@ -55,12 +56,13 @@ public class TopTrumpsCLIApplication {
 	}
 
 	public static void main(String[] args) throws IOException {
-				
+		TopTrumpsCLIApplication app = new TopTrumpsCLIApplication();		
 		boolean userWantsToQuit = false;	
 		int numberOfPlayers = 5; //Added this line
-		GameLogic game = new GameLogic(numberOfPlayers);//edited this line
+//		GameLogic game = new GameLogic(numberOfPlayers);//edited this line
 		while (userWantsToQuit == false) 
 		{		
+			GameLogic game = new GameLogic(numberOfPlayers);
 			System.out.print("\n- - - - - - - - - - -\nWelcome to Top Trumps!\n- - - - - - - - - - -\n");
 			System.out.println("\n- - - - - - - - - - -\nPlayer List:");
 			for(int i =0; i<numberOfPlayers; i++) //edited this line 
@@ -69,47 +71,47 @@ public class TopTrumpsCLIApplication {
 			}
 			System.out.println("- - - - - - - - - - -\n");
 			
-			if (startGame == false) 
+			if (app.startGame == false) 
 			{
-			gameMenu();
+			app.gameMenu();
 			}
-			startGame = false;
-//			game.setGameId(4 + 1);  //read from data base
-			GameLogic.incGameID();
-			System.out.println("GameID: " + GameLogic.getGameId());
+			app.startGame = false;
+			game.setGameId(app.c.numberOfGames()+1);  //read from data base
+			System.out.println("GameID: " + game.getGameId());
 			game.shuffleDeck();
 			game.dealDeck();
 			System.out.println("\n= = = = = = = = = = =\nWelcome to a new game!\n= = = = = = = = = = =\n");
 			
-		while(game.lastPlayerLeft() == false)
-		 {
-			gameLoop(game);
-		 }
-//		connect(game); //added this line but comment it while testing because it will give a server connection error
-		System.out.println("Do you want to Quit the game? Type 0 to Quit, or 1 to continue");
-		Scanner s2 = new Scanner(System.in);
-		String quit = s2.nextLine();
-		int quitNum = Integer.parseInt(quit);
-		if (quitNum == 0) 
-		{
-			userWantsToQuit = true;
-		} 
-		else 
-		{ 
-			userWantsToQuit = false; 
-			game = new GameLogic(numberOfPlayers);
-		}
+			while(game.lastPlayerLeft() == false)
+			 {
+				app.gameLoop(game);
+			 }
+			System.out.println("Winner ID: "+ game.getGameWinnerID());
+			app.connect(game); //added this line but comment it while testing because it will give a server connection error
+			System.out.println("Do you want to Quit the game? Type 0 to Quit, or 1 to continue");
+			Scanner s2 = new Scanner(System.in);
+			String quit = s2.nextLine();
+			int quitNum = Integer.parseInt(quit);
+			if (quitNum == 0) 
+			{
+				userWantsToQuit = true;
+			} 
+			else 
+			{ 
+				userWantsToQuit = false; 
+//				game = null;
+			}
 		}
 		System.out.println("\n- - - - - - - - - - -\nThanks for playing!\n- - - - - - - - - - -\n");
 	}
 	//added this method 
-	public static void connect(GameLogic game)
+	public void connect(GameLogic game)
 	{
 		
-		c.gamerecords(GameLogic.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
+		c.gamerecords(game.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
 	}
 	
-	public static void displayStats()
+	public void displayStats()
 	{
 		System.out.println("-----------------------------------------------");
 		System.out.println("Total number of Games played: " + c.numberOfGames());

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Players {
 	
 	private ArrayList<Player> players;
-	private static int playerID =1;
+	private int playerID =1;
 	public Players()
 	{
 		players = new ArrayList<Player>();
