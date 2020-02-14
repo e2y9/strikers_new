@@ -104,71 +104,101 @@ public class GameLogic {
 		}
 	}
 	
-	public void roundWinner()
-	{
-		int category; 
-		if(onlineCat !=0 && winnerOfRound.equals(playersList.getPlayers().get(0)))
-		{
-			category = onlineCat;
-			onlineCat = 0;
-		}
-		else
-		{
-			if(roundDrawn == false)
-			{
-				category = winnerOfRound.chooseCategory();
-				cat = category;
-			}
-			else
-			{
-				category = previousWinner.chooseCategory();
-			}
-		
-		}
-	
-		int temp = 0;
-		if(lastPlayerLeft() == false)
-		{
-			for(int i=0; i<playersList.getPlayers().size(); i++)
-			{
-				if(playersList.getPlayers().get(i).getLost() == false)
-				{
-					for(int j=i+1 ; j<playersList.getPlayers().size(); j++)
-					{
-						if(playersList.getPlayers().get(j).getLost() == false)
-						{
-							if((this.getPlayersTopCardValue(i, category) > this.getPlayersTopCardValue(j, category)) && (this.getPlayersTopCardValue(i, category)>temp))
-							{
-								temp = this.getPlayersTopCardValue(i, category);
-								winnerOfRound = playersList.getPlayers().get(i);
-								roundDrawn = false;
-							}
-							
-							else if(this.getPlayersTopCardValue(i, category) < this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(j, category)>temp)
-							{
-								temp = this.getPlayersTopCardValue(i, category);
-								winnerOfRound = playersList.getPlayers().get(j);
-								roundDrawn = false;
-							}
-							//edited below line
-							else if(this.getPlayersTopCardValue(i, category) == this.getPlayersTopCardValue(j, category) && this.getPlayersTopCardValue(i, category)<temp)
-							{
-								System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
-								totalNumberOfDraws++;
-								roundDrawn = true;
-							}
-						}
-					}
-				}
-				
-			}
-		}
-		if(roundDrawn == false)
-		{
-			winnerOfRound.incNumberOfRoundsWon();
-		}
-		roundNumber++;
-	}
+	public void roundWinner() {
+        // Same opening category check
+        int category;
+        if(onlineCat !=0 && winnerOfRound.equals(playersList.getPlayers().get(0)))
+        {
+            category = onlineCat;
+            onlineCat = 0;
+        }
+        else
+        {
+            category = winnerOfRound.chooseCategory();
+            cat = category;
+        }
+
+        // changes from here on
+
+
+        int playerCounter = 0;
+        // first, loop through playerList to count number of active players
+        for(int i=0; i<playersList.getPlayers().size(); i++)
+        {
+            if(!playersList.getPlayers().get(i).getLost())
+            {
+                playerCounter++;
+            }
+        }
+
+        // use counter to set array lengths of fixed-length arrays
+        Player[] tempPlayerList = new Player[playerCounter];
+        int[] tempValues = new int[playerCounter];
+
+        // loop again through same playerList, but now add the active players to the newly created tempPlayerList[]
+        int tempCounter = 0;
+        for(int i=0; i<playersList.getPlayers().size(); i++)
+        {
+            if(!playersList.getPlayers().get(i).getLost())
+            {
+                tempPlayerList[tempCounter] = playersList.getPlayers().get(i);
+                tempCounter++;
+            }
+        }
+
+        // take their top card value and add it to the tempValues list
+        for(int i=0; i<tempPlayerList.length; i++) {
+                tempValues[i] = tempPlayerList[i].getPlayerDeck().returnTopCard().getValue(category);
+        }
+
+        // set max to first value in tempValues
+        int max = tempValues[0];
+        // compare max to all other values in tempValues, returning highest as max
+        for (int i = 1; i < tempValues.length; i++)
+        {
+            if (tempValues[i] > max)
+            {
+                max = tempValues[i];
+            }
+        }
+
+        // now check for draws in same list
+        int drawChecker = 0;
+        // to do this, compare max to all values in tempValues *again*, but for equality
+        // if it is the same as more than 1 value, it's a draw case
+        for (int value : tempValues)
+        {
+            if (value == max)
+            {
+                drawChecker++;
+                System.out.println(value + " and " + max);
+                System.out.println("Draw checker:" + drawChecker);
+            }
+        }
+
+        // check if it's a draw case (max matches more than 1 value in tempValues)
+        if (drawChecker > 1)
+        {
+            System.out.println("\nThe round was a draw. Cards added to Draw Deck.");
+            totalNumberOfDraws++;
+            roundDrawn = true;
+        }
+        else
+        {
+            // loop through active players list
+            for (Player player : tempPlayerList) {
+                // if max value is same as that player's value (and we know by now it's not a draw)
+                if (max == player.getPlayerDeck().returnTopCard().getValue(category))
+                {
+                    // assign winner changes
+                    winnerOfRound = player;
+                    winnerOfRound.incNumberOfRoundsWon();
+                    roundDrawn = false;
+                }
+            }
+        }
+        roundNumber++;
+    }
 	
 
 	

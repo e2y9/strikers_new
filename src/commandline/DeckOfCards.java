@@ -61,5 +61,9 @@ public class DeckOfCards {
 	public void setNumOfCards(int numOfCards) {
 		this.numOfCards = numOfCards;
 	}
+    public Card returnTopCard() {
+        return deck.get(0);
+    }
+
 	
 }
