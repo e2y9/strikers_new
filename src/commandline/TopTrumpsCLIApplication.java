@@ -14,7 +14,6 @@ public class TopTrumpsCLIApplication {
 		game.displayUserTopCard();
 		game.playRound();
 		game.transferCards();
-		// try to move dealer cards (if there is a game winner & deckPileWaiting = true), deal cards
 		game.lostPlayer();
 		game.displayRoundWinners();
 	}

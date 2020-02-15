@@ -1,14 +1,20 @@
-/*This method basically creates a card which has a name and Categories */
+/* Group Name: Strikers */
+/*This method creates a card which has a name and Categories */
 
 package commandline;
 
 public class Card {
+	
+	// Card attributes for each card
+	// Store name, array of categories & array of values
 
 	  private String name;
 	  private String[] cardCategories;
 	  private int[] cardValues;
 	  
 	  
+	  // Set names for each category
+	  // Initialise cardValues array
 	  public Card() {
 		  cardCategories = new String[5];
 		  cardCategories[0] = "Intelligence";
@@ -19,6 +25,7 @@ public class Card {
 		  cardValues = new int[5];
 	  }
 	  
+	  // Add name and values to card
 	  public void fillCard(String name, int intelligence, int speed, int strength, int agility, int combat) {
 		    this.name = name;
 		    this.cardValues[0] = intelligence;
@@ -28,6 +35,8 @@ public class Card {
 		    this.cardValues[4] = combat;
 		  }
 	  
+	  // toString method for displaying each card
+	  // Uses a formatted String to space the display evenly 
 	  @Override
 	  public String toString() {
 	    String card = String.format("%nName: %s%n%-13s : %d%n%-13s : %d%n%-13s : %d%n%-13s : %d%n%-13s : %d", 
@@ -36,6 +45,8 @@ public class Card {
 	    		this.cardCategories[3], this.cardValues[3], this.cardCategories[4], this.cardValues[4]);
 	    return card;
 	  }
+	  
+	  // Getters for Card class
 	  
 	  public int getValue(int category)
 	  {

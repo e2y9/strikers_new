@@ -9,7 +9,7 @@ public class HumanPlayer implements Player {
 	  private int playerID;
 	  private int numberOfRoundsWon = 0;
 	  private int numberOfDraws = 0;
-	  private boolean lost = false ;
+	  private boolean lost = false;
 
 
 	  public HumanPlayer(String name) 
