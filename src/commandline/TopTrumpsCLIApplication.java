@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class TopTrumpsCLIApplication {
 	
 	public boolean startGame = false; //This variable is used as a Flag which is set to true if the user selects "Start Game". 
-//	Connect c=new Connect(); //Create a Connect object which is used for the database.
+	Connect c=new Connect(); //Create a Connect object which is used for the database.
 	
 	public static void main(String[] args) throws IOException {
 		
@@ -35,7 +35,7 @@ public class TopTrumpsCLIApplication {
 				app.gameMenu(); //If startGame = false execute the gameMenu method.
 			}
 			app.startGame = false;
-//			game.setGameId(app.c.numberOfGames()+1);
+			game.setGameId(app.c.numberOfGames()+1);
 			System.out.println("GameID: " + game.getGameId()); //Print the Game ID 
 			game.shuffleDeck(); //Shuffle the deck
 			game.dealDeck(); //Deal the Deck to the players
@@ -46,7 +46,7 @@ public class TopTrumpsCLIApplication {
 				app.gameLoop(game);
 			 }
 			System.out.println("Winner ID: "+ game.getGameWinnerID()); //Display winner name and ID.
-//			app.connect(game); //Send the data to the database.
+			app.connect(game); //Send the data to the database.
 			/*Prompt user to play again or quit*/
 			do {
 				System.out.println("Do you want to Quit the game? Type 0 to Quit, or 1 to continue");
@@ -106,8 +106,9 @@ public class TopTrumpsCLIApplication {
 			System.out.println("      GAME MENU      ");
 			System.out.println("1 : See Game Stats");
 			System.out.println("2 : Play a Game");
+			System.out.println("3 : Quit");
 			System.out.println("= = = = = = = = = = =\n");
-			System.out.println("\nEnter 1 or 2:\n");
+			System.out.println("\nEnter 1, or 2:\n");
 			Scanner s = new Scanner(System.in);		
 			//Scan for the user input.
 			if(s.hasNextInt())
@@ -137,16 +138,16 @@ public class TopTrumpsCLIApplication {
 	public void connect(GameLogic game)
 	{
 		
-	//	c.gamerecords(game.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
+		c.gamerecords(game.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
 	}
 	
 	public void displayStats()
 	{
-	//	System.out.println("-----------------------------------------------");
-	//	System.out.println("Total number of Games played: " + c.numberOfGames());
-	//	System.out.println("Number of Human wins: " + c.numberofHumanWin());
-	//	System.out.println("Number of AI wins: " + c.numberofAIwin());
-	//	System.out.printf("Average number of Draws: %.2f\n", c.averageOfDraws());
-	//	System.out.println("Longest Game: " + c.maxRoundInGame() + " rounds");
+		System.out.println("-----------------------------------------------");
+		System.out.println("Total number of Games played: " + c.numberOfGames());
+		System.out.println("Number of Human wins: " + c.numberofHumanWin());
+		System.out.println("Number of AI wins: " + c.numberofAIwin());
+		System.out.printf("Average number of Draws: %.2f\n", c.averageOfDraws());
+		System.out.println("Longest Game: " + c.maxRoundInGame() + " rounds");
 	}
 }

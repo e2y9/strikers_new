@@ -1,53 +1,141 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TopTrump</title>
+        	
+	<!-- Import JQuery, as it provides functions you will probably find useful (see https://jquery.com/) -->
+	<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/flick/jquery-ui.css">
 
-	<head>
-		<!-- Web page title -->
-    	<title>Top Trumps</title>
-    	
-    	<!-- Import JQuery, as it provides functions you will probably find useful (see https://jquery.com/) -->
-    	<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
-    	<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-    	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/flick/jquery-ui.css">
+	<!-- Optional Styling of the Website, for the demo I used Bootstrap (see https://getbootstrap.com/docs/4.0/getting-started/introduction/) -->
+	<!-- <link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/TREC_IS/bootstrap.min.css"> -->
+	<script src="http://dcs.gla.ac.uk/~richardm/vex.combined.min.js"></script>
+	<script>vex.defaultOptions.className = 'vex-theme-os';</script>
+	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex.css"/>
+	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	 <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/">
 
-		<!-- Optional Styling of the Website, for the demo I used Bootstrap (see https://getbootstrap.com/docs/4.0/getting-started/introduction/) -->
-		<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/TREC_IS/bootstrap.min.css">
-    	<script src="http://dcs.gla.ac.uk/~richardm/vex.combined.min.js"></script>
-    	<script>vex.defaultOptions.className = 'vex-theme-os';</script>
-    	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex.css"/>
-    	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
-    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-	</head>
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+    
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
 
-    <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
-    	
-    	<div class="container">
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0px;
+      border-radius: 0px;
+	  min-height: 80px;
+		padding-top: 0px;
+		background-color: #555;
+    }
+	
+	.navbar-brand {
+	
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	}
+	
+	.dropdown-toggle
+	{
+	font-size: 30px;
+	}
+	
+	#dropdown-item
+	{
+	font-size: 30px;
+	}
+	
+	.nav-link
+	{
+	font-size: 30px;
+	display: inline-block;
+	color: #FFFFFF;
+	}
+	
+	.navbar-nav {
+    	display: inline-block;
+		font-size: 30px;
+		padding-top: 0px;
+		background-color: #555;
+		color: #FFFFFF;
+		position: relative;
+	}
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 400px}
+    
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
 
-			<!-- Add your HTML Here -->
-		
-		</div>
-		
-		<script type="text/javascript">
-		
-			// Method that is called on page load
-			function initalize() {
-			
-				// --------------------------------------------------------------------------
-				// You can call other methods you want to run when the page first loads here
-				// --------------------------------------------------------------------------
-				
-				// For example, lets call our sample methods
-				helloJSONList();
-				helloWord("Student");
-				
-			}
-			
-			// -----------------------------------------
-			// Add your other Javascript methods Here
-			// -----------------------------------------
-		
-			// This is a reusable method for creating a CORS request. Do not edit this.
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand navbar-left" href="http://localhost:7777/toptrumps">
+	  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="100" height="60" alt="Logo">
+	  </a>
+    </div>
+    <ul class="navbar-nav mr-auto" >
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Start Game</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="http://localhost:7777/toptrumps/game" onclick="newGame(5)">Against 4 players</a>
+              <a class="dropdown-item" href="http://localhost:7777/toptrumps/game" onclick="newGame(4)">Against 3 players</a>
+              <a class="dropdown-item" href="http://localhost:7777/toptrumps/game" onclick="newGame(3)">Against 2 players</a>
+              <a class="dropdown-item" href="http://localhost:7777/toptrumps/game" onclick="newGame(2)">Against 1 players</a>
+            </div>
+            <a class="nav-link" href="http://localhost:7777/toptrumps/stats">Show Stats</a>
+        </li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-12 text-center"> 
+      <h1>TopTrump for Marvel Heroes</h1>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+    <h3>Designed by Strikers</h3>
+    <p>Ali Utku Demir - Ashwin Bhatnagar - Emmet Young - Pranav Dadhich</p>
+</footer>
+
+<script type="text/javascript">
+	function newGame(numberofplayers) {
+                var xhr = createCORSRequest('PUT', "http://localhost:7777/toptrumps/startnewgame?numberofplayers="+numberofplayers); // Request type and URL
+                if (!xhr) {
+                    alert("CORS not supported");
+                }
+                xhr.onload = function(e) {
+                    var responseText = xhr.response; // the text of the response
+                };
+                xhr.send();
+            }
+
+            // This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
   				var xhr = new XMLHttpRequest();
   				if ("withCredentials" in xhr) {
@@ -71,57 +159,6 @@
   				 }
   				 return xhr;
 			}
-		
 		</script>
-		
-		<!-- Here are examples of how to call REST API Methods -->
-		<script type="text/javascript">
-		
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloJSONList() {
-			
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
-				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();		
-			}
-			
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloWord(word) {
-			
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word="+word); // Request type and URL+parameters
-				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();		
-			}
-
-		</script>
-		
-		</body>
+</body>
 </html>
