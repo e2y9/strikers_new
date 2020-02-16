@@ -1,6 +1,9 @@
+/* Group Name: Strikers */
+
+/*Interface used in HumanPlayer and the CompPlayer Classes.*/
 package commandline;
 
-interface Player { 
+public interface Player { 
 	  public String getName();
 	  public int chooseCategory();
 	  public DeckOfCards getPlayerDeck();
@@ -10,9 +13,7 @@ interface Player {
 	  public void incNumberOfRoundsWon();
 	  public boolean getLost();
 	  public void setLost(boolean lost);
-	  public void incNumberOfDraws();
-	  public String topCard();
-	  
+	  public String topCard();  
 }
 
 

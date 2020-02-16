@@ -12,7 +12,7 @@ public class Connect{
 	Statement statement;
 		
     public Connect() {
-    	//Connecting to yacata server for postgresql database
+    	//Connecting to server for postgresql database
     	try {
     		connection=DriverManager.getConnection("jdbc:postgresql://52.24.215.108:5432/", "Strikers", "Strikers");
     		statement = connection.createStatement();

@@ -48,7 +48,7 @@ public class GameLogic {
 		// Initialise a new FileReader to read card attributes from txt file
 		try
 		{
-	    	FileReader fr = new FileReader("src\\commandline\\final_MarvelDeck.txt");
+	    	FileReader fr = new FileReader("src\\commandline\\MarvelDeck.txt");
 	    	loadCards(fr);
 	    }
 		// Catch exception if file is not found
@@ -58,16 +58,17 @@ public class GameLogic {
 	    }	
 		// Add the human user to the game
 		playersList.addPlayer(new HumanPlayer("User"));	
-		// Set human user as initial "winner" (so they choose category in the first round)
-		winnerOfRound = playersList.getPlayers().get(0);
-		previousWinner = playersList.getPlayers().get(0);
-		
 		// Loop to add AI players based on numOfPlayers
 		for(int i=1; i<numOfPlayers; i++)		
 		{
 			String name = "AI "+ i;
 			playersList.addPlayer(new CompPlayer(name));
 		}
+		// Set a random player as the initial winner so that it can choose the category.
+		
+		Random randomPlayer = new Random();
+		winnerOfRound = playersList.getPlayers().get(randomPlayer.nextInt(numOfPlayers));
+		previousWinner = winnerOfRound;
 		
 	}
 	
@@ -106,28 +107,25 @@ public class GameLogic {
 		    s.close();
 		}
 	 
-	public void dealDeck()
-	{
-		int deckPosition = 0;
-		// Sets count to size of deck divided by number of players
-		// (40 cards / 5 players = 8 cards each)
-		int count = allCards.getDeck().size() / playersList.getPlayers().size();
-		// Add cards while count is more than 0 and deckPosition is less than the size of the deck 
-		// Each player will 
-		while(count>0 && deckPosition < allCards.getDeck().size())
+		public void dealDeck()
 		{
-			// Loop through list of players, giving each 1 card
-			for(int i=0; i<playersList.getPlayers().size(); i++)
+			int deckPosition = 0;
+			int count = allCards.getDeck().size();
+			while(count>0)
 			{
-				// Access each player's deck and use addCard to move cards from allCards to the player's deck
-				// Increment deckPosition
-				playersList.getPlayers().get(i).getPlayerDeck().addCard(allCards.getDeck().get(deckPosition++));
+				for(int i=0; i<playersList.getPlayers().size(); i++)
+				{
+					if(deckPosition == allCards.getDeck().size())
+					{
+						break;
+					}
+					playersList.getPlayers().get(i).getPlayerDeck().addCard(allCards.getDeck().get(deckPosition++));
+				}
+				count--;
 			}
-			// Decrement count until 0, continuing to add 1 card to each player while there are cards
-			count--;
+			
 		}
 		
-	}
 	
 	
 	public void shuffleDeck()
@@ -329,7 +327,7 @@ public class GameLogic {
 		// Call roundWinner method to compare card values
 		roundWinner();
 		// Use the cat integer to get the correct category name for the display
-		System.out.println("\n" + previousWinner.getName() + " chose " + allCards.getDeck().get(0).getCategories(cat));
+		System.out.println("\n\n" + previousWinner.getName() + " chose " + allCards.getDeck().get(0).getCategories(cat));
 		// Print game winner and update previousWinner for next round
 		System.out.println("\n\n" + getWinnerOfRound());
 		previousWinner = winnerOfRound;
@@ -464,11 +462,12 @@ public class GameLogic {
 			{
 				winnerOfRound.getPlayerDeck().getDeck().add(drawPile.getDeck().get(i));
 			}
+			// Set dPW back to false
+			deckPileWaiting = false;
+			// Empty drawPile to avoid duplicate cards
+			this.clearDrawPile();
 		}
-		// Set dPW back to false
-		deckPileWaiting = false;
-		// Empty drawPile to avoid duplicate cards
-		this.clearDrawPile();
+
 	}
 	
 	// Wipe the draw pile after its cards have been dealt
@@ -552,7 +551,7 @@ public class GameLogic {
 	// Getter for number of cards in each player's deck
 	public ArrayList<Integer> getNumberOfCards()
 	{
-		// Return player's number of cards for the databse
+		// Return player's number of cards for the database
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		for(int i=0; i<playersList.getPlayers().size(); i++)	
 		{
@@ -587,7 +586,7 @@ public class GameLogic {
 	}
 	
 	public void displayRoundNumber() {
-		System.out.println("Round #" + roundNumber + " = = = = = =");
+		System.out.println("= = = = = = = Round #" + roundNumber + " = = = = = = =");
 	}
 	
 	public void printDeck()

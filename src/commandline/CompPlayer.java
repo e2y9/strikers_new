@@ -1,30 +1,31 @@
-/*This method implements Player interface, Choose Category method is still incomplete*/
+/*Group Name: Strikers*/
+/*This method implements Player interface and is used in GameLogic to Create an AI or Computer Player*/
 package commandline;
 
 import java.util.ArrayList;
 
 public class CompPlayer implements Player {
 
-	 private String name;
-	 private DeckOfCards playerDeck;
-	 private int playerID;
-	 private int numberOfRoundsWon = 0;
-	 private int numberOfDraws = 0;
-	 private boolean lost = false;
+	 private String name; 	//name variable stores the name of the player.
+	 private DeckOfCards playerDeck; //This object is used to store the cards a player has.
+	 private int playerID; //Each player is assigned a playerID which is stored in database.
+	 private int numberOfRoundsWon = 0; //This variable is used as the counter to count the total number of rounds won by the player.
+	 private boolean lost = false; //This variable is used as a flag which helps in determine if the player still has cards left.
 
-
+/*Constructor for the CompPlayer Class*/
 	public CompPlayer(String name) 
 	  {		  
-		  this.name = name;
-		  playerDeck = new DeckOfCards();
+		  this.name = name; 
+		  playerDeck = new DeckOfCards(); //Creates a playerDeck as the DeckOfCards object.
 	  }
 	
-
+	/*Getter Method for the name of the player.*/
 	  public String getName() {
 		  return name;
 	  }
 
-
+	  /*Below method is used to Choose the category if the player is a Computer Player. The difficulty level is set to hard, so the computer player
+	   * picks a category which has the highest value for the drawn card.*/
 	@Override
 	public int chooseCategory()
 	  {
@@ -46,7 +47,6 @@ public class CompPlayer implements Player {
 			 }
 		 }
 		 // now check which value (still in order 0-4, intelligence to combat) matches max
-		 // this method is called by whoChoosesCategory, so the return value is passed back to that method to set category
 		 if (max == tempValues[0])
 		 {
 			 return 0;
@@ -73,6 +73,7 @@ public class CompPlayer implements Player {
 		 } // return 99 (out of bounds) in result of an error 
 	  }
 	
+	/*This method returns the topCard the player has in the deck. If there is no card in the deck it simply returns an empty string*/
 	public String topCard()
 	{
 		String result = "";
@@ -87,41 +88,38 @@ public class CompPlayer implements Player {
 		return result;
 	}
 	
+	/*Getter Method which returns the playerDeck Object reference.*/
 	 public DeckOfCards getPlayerDeck() {
 			return playerDeck;
 		}
-
+	
+	 /*Getter Method for the playerID*/
 	public int getPlayerID() {
 		return playerID;
 	}
 
-
+	/*Setter Method for the playerID*/
 	public void setPlayerID(int playerID) {
 		this.playerID = playerID;
 	}
 
-
+	/*Getter Method for numberOFRoundsWon*/
 	public int getNumberOfRoundsWon() {
 		return numberOfRoundsWon;
 	}
 
-
+	/*This method increments the number of rounds.*/
 	public void incNumberOfRoundsWon() {
 		this.numberOfRoundsWon++;
 	}
 
-
+	/*Getter Method for lost flag*/
 	public boolean getLost() {
 		return lost;
 	}
 
-
+	/*Setter Method for the lost flag*/
 	public void setLost(boolean lost) {
 		this.lost = lost;
-	}
-	
-	public void incNumberOfDraws()
-	{
-		numberOfDraws++;
 	}
 }
