@@ -16,7 +16,7 @@ carnage 23 32 51 49 21
 electro 21 19 18 29 17
 enigma 31 21 24 59 42
 hulk 21 31 71 74 45
-goldskull 30 19 21 18 9
+goldenskull 30 19 21 18 9
 magik 41 22 24 29 44
 gwenpool 23 22 33 31 51
 thor 21 73 75 62 43
