@@ -127,4 +127,14 @@ public class Connect{
 			}
     	   
        }
+       //Disconnect database server when write/read operations are carried out.
+       public void disconnect()
+   	{
+   		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   	}
 }

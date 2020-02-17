@@ -58,26 +58,28 @@ public class TopTrumpsRESTAPI {
 	// Add relevant API methods here
 	// ----------------------------------------------------
 	
+	/*The below method responds to the http PUT request and is used to start the game. It takes number of players as an argument*/
 	@PUT
-	@Path("/startnewgame")
-	public void newGame(@QueryParam("numberofplayers") int numberofplayers) //should get playernum from javascript function
+	@Path("/startnewgame") //URI path for this method
+	public void newGame(@QueryParam("numberofplayers") int numberofplayers) //Gets the numofplayers from Javascript.
 		{
-		game = new GameLogic(numberofplayers);
-		game.shuffleDeck();
-		game.dealDeck();
-				
-		//setupplayer method in logic will be added.
-		
-		//starting a new game with Model
-		
+		game = new GameLogic(numberofplayers); //Creates a GameLogic Object define
+		game.shuffleDeck(); //Calls the shuffleDeck method from the GameLogic which shuffles the Marvel deck before dealing it to players.
+		game.dealDeck(); //Calls the dealDeck method which deals the cards to the added number of players.		
 		}
+	
+	//getHumanCard method responds to the HTTP GET Requests. It throws IOException
 	@GET
 	@Path("/getHumanCard")
 	public String getHumanCard() throws IOException {
-		
+		//It returns the Human Player top Card attribute which is used to Display the human player's top card using the GameScreen.ftl 
+		//It uses Object writer to easily convert the java object into JSON string.
 		return oWriter.writeValueAsString(game.getHumanPlayerTopCardAttributes());
 	}
-		
+	
+	/*getWinnerCard method responds to the HTTP get request 
+	 * Throws IO Exception.
+	 * Returns the Winner and winner card attributes using the object writer and GameLogic*/
 	@GET
 	@Path("/getWinnerCard")
 	public String getWinnerCard() throws IOException {
@@ -86,29 +88,39 @@ public class TopTrumpsRESTAPI {
 	
 	}
 	
+	/*Below method responds to the HTTP PUT requests.
+	 *Throws IO Exception.
+	 *Takes category as the argument using the Javascript in the GameScreen ftl file
+	 *This passes the category to the setOnlineCat method in the GameLogic. Created to pass the category to the GameLogic.*/
 	@PUT
-	@Path("/humanCat")
+	@Path("/humanCat") //Defines the URI for the below method 
 	public void humanPlayerChosenCategory(@QueryParam("category") String category) throws IOException {
 		game.setOnlineCat(Integer.parseInt(category));
 	}
 	
+	/*nextRound method responds to the HTTP GET request.
+	 * Throws IO Exception.
+	 * Calls various method from the GameLogic to execute the round.*/
 	@GET
-	@Path("/nextRound")
+	@Path("/nextRound") //Defines the URI for the nextRound method.
 	public void nextRound() throws IOException {
 		
-		game.playRound();
-		game.transferCards();
-		game.lostPlayer();
-		game.displayRoundWinners();
+		game.playRound(); //Calls the playRound method of the GameLogic which starts the round.
+		game.transferCards(); //Calls the method to transfer the card to the Winner of the round.
+		game.lostPlayer(); //Calls the lostPlayer method to check if any player has 0 cards left.
+		game.displayRoundWinners(); //Calls the displayRoundWinner method.
 		
 	}
 	
+	/*skipGame method responds to the HTTP GET requests.
+	 *Throws IO Exception
+	 *This method is created to skip the Game to end if the Human Player has Lost.*/
 	@GET
-	@Path("/skipGame")
+	@Path("/skipGame") 
 	public void skipGame() throws IOException {
-		while(game.lastPlayerLeft() == false)
+		while(game.lastPlayerLeft() == false) //Loop until there is a winner.
 		{
-			game.playRound();
+			game.playRound(); 
 			game.transferCards();
 			game.lostPlayer();
 			game.displayRoundWinners();
@@ -117,21 +129,24 @@ public class TopTrumpsRESTAPI {
 
 	}	
 	
+	/*getRoundNumber responds to the HTTP GET request.
+	 * It returns the Number of Round using the GameLogic getRoundNumber method and Object Writer*/
 	@GET
 	@Path("/getRoundNumber")
 	public String getRoundNumber() throws IOException {
 		return oWriter.writeValueAsString(game.getRoundNumber());	
 	}
 	
+	/*checkHumanWinner responds to the GET requests.
+	 * It returns the true as a string if the winner is human using the GameLogic and ObjectWriter.*/
 	@GET
 	@Path("/checkHumanWinner")
 	public String checkHumanWinner() throws IOException {
-		System.out.println(game.getWinnerOfRound());
-		System.out.println(game.isWinnerAHuman());
 		return oWriter.writeValueAsString(game.isWinnerAHuman());	
-	
 	}
 	
+	/*getCardNumbers method reponds to the HTTP GET requests.
+	 * Returns the number of rounds from Game logic using the Object Writer*/
 	@GET
 	@Path("/getCardNumbers")
 	public String getCardNumbers() throws IOException {
@@ -140,6 +155,7 @@ public class TopTrumpsRESTAPI {
 	
 	}
 	
+	/*This method returns the number of cards in communal pile from GameLogic using the Object writer.*/
 	@GET
 	@Path("/getDrawpile")
 	public String getDrawpile() throws IOException {
@@ -147,6 +163,7 @@ public class TopTrumpsRESTAPI {
 	
 	}
 	
+	/*This method returns the name of the Winner if only 1 player has the cards, otherwise it returns null.*/
 	@GET
 	@Path("/getGameWinner")
 	public String getGameWinner() throws IOException {
@@ -157,15 +174,19 @@ public class TopTrumpsRESTAPI {
 		return "null";
 	}
 	
+	/*This method is used to write the game details to the database.*/
 	@GET
 	@Path("/write2database")
 	public void write2database()
 	{
-		connect=new Connect();
-		int gameid = connect.numberOfGames()+1;
+		connect=new Connect(); //Creates a Connect Object to connect to the database.
+		int gameid = connect.numberOfGames()+1; //reads the lastGameid from the database and increment it and set it for the next game.
+		/*below line sends the data to write to the database.*/
 		connect.gamerecords(gameid, game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
+		connect.disconnect(); //Disconnect from the Database after the data is transferred.
 	}
 	
+	/*getStats method is used for displaying the stats in online mode it gets the data from the server and save and return it using an ArrayList*/
 	@GET
 	@Path("/getStats")
 	public String getStats() throws IOException {
@@ -176,44 +197,8 @@ public class TopTrumpsRESTAPI {
 		statList.add((double) connect.numberofAIwin());
 		statList.add(connect.averageOfDraws());
 		statList.add((double) connect.maxRoundInGame());
+		connect.disconnect();
 
-		return oWriter.writeValueAsString(statList);
-		
-	
-	}
-	
-	
-	//@GET
-	//@Path("/helloJSONList")
-	/**
-	 * Here is an example of a simple REST get request that returns a String.
-	 * We also illustrate here how we can convert Java objects to JSON strings.
-	 * @return - List of words as JSON
-	 * @throws IOException
-	 */
-	//public String helloJSONList() throws IOException {
-		
-	//	List<String> listOfWords = new ArrayList<String>();
-	//	listOfWords.add("Hello");
-	//	listOfWords.add("World!");
-		
-		// We can turn arbatory Java objects directly into JSON strings using
-		// Jackson seralization, assuming that the Java objects are not too complex.
-		//String listAsJSONString = oWriter.writeValueAsString(listOfWords);
-		
-		//return listAsJSONString;
-	//}
-	
-	//@GET
-	//@Path("/helloWord")
-	///**
-	// * Here is an example of how to read parameters provided in an HTML Get request.
-	// * @param Word - A word
-	// * @return - A String
-	// * @throws IOException
-	// */
-	//public String helloWord(@QueryParam("Word") String Word) throws IOException {
-	//	return "Hello "+Word;
-	//}
-	
+		return oWriter.writeValueAsString(statList); //Returns the ArrayList using the Object Writer.
+	}	
 }

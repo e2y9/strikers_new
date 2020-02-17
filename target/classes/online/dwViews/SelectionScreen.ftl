@@ -29,6 +29,7 @@
     <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
 
+<!-- Styling for interface -->
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -37,6 +38,7 @@
 	  min-height: 80px;
 		padding-top: 0px;
 		background-color: #555;
+		
     }
 	
 	.navbar-brand {
@@ -72,8 +74,10 @@
 		position: relative;
 	}
     
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 400px}
+    /* Set height of the grid */
+    .row.content {
+    height: 500px;
+    padding-top: 200px;}
     
     
     /* Set black background color, white text and some padding */
@@ -87,14 +91,15 @@
   </style>
 </head>
 <body>
-
+<!-- Display navigation bar, "start new game" and "see statistics" options-->
 <nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand navbar-left" href="http://localhost:7777/toptrumps">
-	  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="100" height="60" alt="Logo">
+	  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="140" height="60" alt="Logo">
 	  </a>
     </div>
+	<!-- Dropdown menu to choose number of players to play against -->
     <ul class="navbar-nav mr-auto" >
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Start Game</a>
@@ -118,12 +123,14 @@
   </div>
 </div>
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center" onclick="window.location.href = 'https://github.com/e2y9/strikers_new';">
     <h3>Designed by Strikers</h3>
     <p>Ali Utku Demir - Ashwin Bhatnagar - Emmet Young - Pranav Dadhich</p>
 </footer>
 
+
 <script type="text/javascript">
+	//Start the new game and pass number of player according to chosen option in dropdown menu
 	function newGame(numberofplayers) {
                 var xhr = createCORSRequest('PUT', "http://localhost:7777/toptrumps/startnewgame?numberofplayers="+numberofplayers); // Request type and URL
                 if (!xhr) {

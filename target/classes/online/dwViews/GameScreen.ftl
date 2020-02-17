@@ -27,12 +27,13 @@
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
     
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
 	
-	<style>
+	<!-- Styling for interface -->
+	<style> 
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0px;
@@ -68,6 +69,7 @@
       background-color: #555;
       color: white;
       padding: 15px;
+      cursor: point;
     
     }
     
@@ -118,7 +120,7 @@
 
   </style>
 	</head>
-
+	<!-- Display navigation bar -->
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	<nav class="navbar">
 			  <div class="container-fluid">
@@ -131,49 +133,48 @@
 			</nav>
 			
 	<div class="container">
-			
+	<!-- Divide the screen into three, one row and three columns -->
         <div class="row">
-            <div class="col-md-4">
-                    <h3>Your card</h3>
-
-                <div class="card">
-                    <img class="card_jpg" src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="300" height="300" alt="Card image">
+            <div class="col-sm-3">
+                    <h4>Your card</h4>
+				<!-- Displaying card details -->
+                <div>
+                    <img class="card_jpg" src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="255" height="300" alt="Marvel_image">
                     <div class="cardFeatures" align="middle">
-                        <h5 class="cardName"></h5>
+                        <h4 class="cardName"></h4>
                     </div>
                	
                     <ul class="list-group">
-                            <button class="list-group-item button1" type='button' id='AttVal1' onclick="javascript:checkHumanCat('1')">                 	  
+                            <button class="list-group-item button1" type='button' id='AttVal1' onclick="javascript:checkHumanCat('1')" />                 	  
  							<button class="list-group-item button2" type='button' id='AttVal2' onclick="javascript:checkHumanCat('2')" />                      
 							<button class="list-group-item button3" type='button' id='AttVal3' onclick="javascript:checkHumanCat('3')" />                      
 							<button class="list-group-item button4" type='button' id='AttVal4' onclick="javascript:checkHumanCat('4')" />
 							<button class="list-group-item button5" type='button' id='AttVal5' onclick="javascript:checkHumanCat('5')" />
-                        </li>
                     </ul>
                 </div>
             </div>
 
 
-            <div class="col-md-4">
-            	
+            <div class="col-md-5">
+            	<!-- Displaying number of rounds -->
             	<div class="showRounds">
 		        <h5>Number of rounds: <bold id="numberOfRounds"></bold></h5>
 		        </div>
-		        
+		        <!-- Displaying in case draw happens-->
 		        <div class="drawCase">
 				<h3>It is a draw. Last round's winner will choose the category.</h3>
 				</div> 
-		    				
+		    	<!-- Displaying human turn-->			
 				<div class="chosenCat">
 				<h3>Your turn. Choose a category.</h3>
 				<h3>Chosen Category: <bold id="chosenCategory"></bold> </h3>
 				</div>     
-                
+                <!-- Displaying in case human player lost-->
                 <div class="lostCase">
 				<h3>You have lost.</h3>
 				<h3 id="skipQuestion">Do you want to skip to the end of the game or continue watching each round? </h3>
 				</div> 
-				
+				<!-- Displaying in case human player lost-->
 				<div align="center" class="winner">
 				<h3>Winner is: <bold id="winnerPlayer"></bold> </h3>
 				<input type="button" id="return" value="Return to Main Menu" onclick="window.location.href = 'http://localhost:7777/toptrumps';" />
@@ -185,9 +186,9 @@
                     <input type='button' id='showSkipButton' value='Skip to the End' onclick='javascript:skipGame()' />
                 </div>
 
-                  <!-- Winner Card-->
+                <!-- Winner Card-->
                 <div align="center" class="wincard">
-                    <img class="wincard_jpg" src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="250" height="300" alt="Card image cap">
+                    <img class="wincard_jpg" src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="250" height="300" alt="Winner_card_image">
                     <div class="wincardFeatures">
                         <h4 class="wincardName"></h4>
                 	</div>
@@ -216,7 +217,7 @@
 			
             <div class="col-xs-3">
                 
-
+			<!-- Displaying number of cards remaining in game-->
            <div class="cardsOfPlayers">
                     <table style="width:100%">
 					  <tr class="rowPlayer1">
@@ -241,8 +242,9 @@
 					  </tr>
 					</table>
 				</div>
+				<!-- Displaying number of cards in communal pile-->
 				<div class="comPile">
-                    <h5>Cards in Communal Pile: <bold id="numberOfCardsInCommunalPile"></bold></h5>
+                    <h4>Cards in Communal Pile: <bold id="cardsCommunalPile"></bold></h4>
              	</div>
 
             </div>
@@ -252,7 +254,7 @@
 
     </div>
 
-			<footer class="container-fluid text-center">
+			<footer class="container-fluid text-center" onclick="window.location.href = 'https://github.com/e2y9/strikers_new';">
 				<h3>Designed by Strikers</h3>
 				<p>Ali Utku Demir - Ashwin Bhatnagar - Emmet Young - Pranav Dadhich</p>
 			</footer>
@@ -269,18 +271,18 @@
 		
 			// Method that is called on page load
 			function initalize() {
-				$(".chosenCat").hide();
-                $(".drawCase").hide();
-                $(".lostCase").hide();
-                $(".winner").hide();
-                $(".card :button").prop("disabled", true);
-                getHumanCard();
-                getCardNumbersLeft();
-                //notchosen='true';
-                $("#skipToEnd").hide();
-                $("#showSkipButton").hide();
-                getRoundNumber();
-                checkHumanWinner();
+			/* Hide buttons -except next round- and visualization for initialization*/
+				$(".chosenCat").hide(1); 
+                $(".drawCase").hide(1);
+                $(".lostCase").hide(1);
+                $(".winner").hide(1);
+                $(".list-group :button").prop("disabled", true);
+                getHumanCard(); //Bring Human card features
+                getCardNumbersLeft(); //Bring number of cards remaining per player
+                $("#skipToEnd").hide(1);
+                $("#showSkipButton").hide(1);
+                getRoundNumber(); //Bring number of rounds
+                checkHumanWinner(); //To bring who will choose category in the first round
 				// --------------------------------------------------------------------------
 				// You can call other methods you want to run when the page first loads here
 				// --------------------------------------------------------------------------
@@ -294,7 +296,7 @@
 			function nextRound() {
 			if(notchosen=='true')
 				{
- 				alert("Category not chosen");
+ 				alert("Category not chosen"); //alert if category is not chosen
  				}	
  			else
  				{
@@ -304,10 +306,10 @@
                 	}
             		xhr.onload = function(e) {
  					
- 					$(".chosenCat").hide();
- 					$(".drawCase").hide();
+ 					$(".chosenCat").hide(1); 
+ 					$(".drawCase").hide(1);
  					getHumanCard();
- 					$(".card :button").prop("disabled", true);
+ 					$(".list-group :button").prop("disabled", true);
  					getCardNumbersLeft();
  					getWinnerCard();
 					getDrawpile();
@@ -320,7 +322,7 @@
 					xhr.send();
 				}	
 			}
-			
+			/*When Player lost, it should prompt a button to skip to end of game*/
 			function skipGame() {
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/skipGame"); // Request type and URL
                 if (!xhr) {
@@ -341,7 +343,7 @@
 			
 			
 					
-			
+			/*Bring number of cards Communal pile, Hide winner card and card choose class*/
 			function getDrawpile() {
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDrawpile"); // Request type and URL
                 if (!xhr) {
@@ -349,17 +351,18 @@
                 }
             xhr.onload = function(e) {
             		var responseText = xhr.response;
-					$("#numberOfCardsInCommunalPile").text(responseText);
+					$("#cardsCommunalPile").text(responseText);
 					if(responseText != '0')
 					{
-					$(".wincard").hide();
-					$(".chosenCat").hide();
-					$(".drawCase").show();	
+					$(".wincard").hide(1);
+					$(".chosenCat").hide(1);
+					$(".drawCase").show(800);	
  					}
 			    };
 			xhr.send();
 			}
 			
+			/*Hide winner and draw visualizations, get the game winner variable if there is a game winner according to model*/
 			function getGameWinner() {
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getGameWinner"); // Request type and URL
                 if (!xhr) {
@@ -371,12 +374,12 @@
             		{
             		
  					$("#winnerPlayer").text(gameWinner); 
-					$(".winner").show();
- 					$("#showSkipButton").hide();
- 					$("#showNextButton").hide();
- 					$(".drawCase").hide();
- 					$(".wincard").hide();
- 					$("#skipQuestion").hide();
+					$(".winner").show(1);
+ 					$("#showSkipButton").hide(800);
+ 					$("#showNextButton").hide(800);
+ 					$(".drawCase").hide(800);
+ 					$(".wincard").hide(800);
+ 					$("#skipQuestion").hide(800);
  					write2database();
             		}
 									
@@ -384,7 +387,8 @@
 			    
 			xhr.send();
 			}
-			    
+			
+			/*Get number of rounds*/			
 			function getRoundNumber() {
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber"); // Request type and URL
                 if (!xhr) {
@@ -398,6 +402,7 @@
 			xhr.send();
 			}
 			
+			/*Returns true if human has won the round, if so display choose category visualization*/
 			function checkHumanWinner() {
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/checkHumanWinner"); // Request type and URL
                 if (!xhr) {
@@ -407,17 +412,16 @@
             		var responseText = xhr.response;
             		if(responseText == 'true')
             		{
-            			$(".card :button").prop("disabled", false);
+            			$(".list-group :button").prop("disabled", false);
             			$("#chosenCategory").text("");
             			notchosen='true';
-            			$(".chosenCat").show();
+            			$(".chosenCat").show(800);
  					}
 			    };
 			xhr.send();
 			}
 			
-			//Bring first round Human top card
-			
+			//Bring and display Human top card features
 			function getHumanCard() {
                 var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getHumanCard"); // Request type and URL
                 if (!xhr) {
@@ -435,6 +439,7 @@
                 xhr.send();
             }
             
+			//Returns winner card of round
             function getWinnerCard() {
                 var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getWinnerCard"); // Request type and URL
                 if (!xhr) {
@@ -442,43 +447,44 @@
                 }
                 xhr.onload = function(e) {
                     var responseText = JSON.parse(xhr.response); // the text of the response
-                    $(".wincard").show();
+                    $(".wincard").show(800);
                     $("#winplayer").text(responseText[0]);
                     $(".wincardName").text(responseText[1]);
                     $(".wincard_jpg").attr("src", "https://raw.githubusercontent.com/e2y9/strikers_notes/master/card_pictures/"+responseText[1].toLowerCase()+".jpg")
-                    for(var i=2; i<responseText.length; i++) {
+                    //loop to bring features of card
+					for(var i=2; i<responseText.length; i++) {
                         $("#WinAttVal"+(i-1)).text(responseText[i]);
                     }
                 };
                 xhr.send();
             }
             
-            
-          function getCardNumbersLeft() {
+            //Get number of remaining cards for each player 
+			function getCardNumbersLeft() {
                 var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCardNumbers"); // Request type and URL
                 if (!xhr) {
                     alert("CORS not supported");
                 }
                 xhr.onload = function(e) {
                     var responseText = JSON.parse(xhr.response); // the text of the response
-                     for(var i=0; i<responseText.length; i++) {
+                     for(var i=0; i<responseText.length; i++) { //Loop to return the number of cards per player 
                         $("#cardsOfPlayer"+(i+1)).text(responseText[i]);
                         
                     }
-					for(var i=5; i>responseText.length; i--) {
-						$(".rowPlayer"+i).hide();
+					for(var i=5; i>responseText.length; i--) { //Hide the players who are not playing
+						$(".rowPlayer"+i).hide(1);
 					}
                     if(responseText[0] == '0')
 					{
-					$(".lostCase").show();
-					$("#skipToEnd").show();
-					$("#showSkipButton").show();
+					$(".lostCase").show(800);
+					$("#skipToEnd").show(800);
+					$("#showSkipButton").show(800);
 					}
                 };
                 xhr.send();
             }
             
-            
+            //Display which category human chosen and pass it to the game model
             function checkHumanCat(category) {
                 var xhr = createCORSRequest('PUT', "http://localhost:7777/toptrumps/humanCat?category="+category); // Request type and URL+parameters
                 if (!xhr) {
@@ -492,6 +498,7 @@
                 xhr.send();
             }
 			
+			//Write game records to database 
 			function write2database() {
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/write2database"); // Request type and URL
                 if (!xhr) {

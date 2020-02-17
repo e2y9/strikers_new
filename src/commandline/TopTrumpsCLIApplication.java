@@ -4,6 +4,7 @@
 package commandline;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class TopTrumpsCLIApplication {
@@ -35,7 +36,8 @@ public class TopTrumpsCLIApplication {
 				app.gameMenu(); //If startGame = false execute the gameMenu method.
 			}
 			app.startGame = false;
-			game.setGameId(app.c.numberOfGames()+1);
+			game.setGameId(app.c.numberOfGames()+1); //Connecting to database for getting current gameid.
+			app.c.disconnect(); //Disconnect the server afterwards
 			System.out.println("GameID: " + game.getGameId()); //Print the Game ID 
 			game.shuffleDeck(); //Shuffle the deck
 			game.dealDeck(); //Deal the Deck to the players
@@ -106,7 +108,6 @@ public class TopTrumpsCLIApplication {
 			System.out.println("      GAME MENU      ");
 			System.out.println("1 : See Game Stats");
 			System.out.println("2 : Play a Game");
-			System.out.println("3 : Quit");
 			System.out.println("= = = = = = = = = = =\n");
 			System.out.println("\nEnter 1, or 2:\n");
 			Scanner s = new Scanner(System.in);		
@@ -137,17 +138,22 @@ public class TopTrumpsCLIApplication {
 	
 	public void connect(GameLogic game)
 	{
-		
+		Connect c=new Connect();
 		c.gamerecords(game.getGameId(), game.getTotalNumberOfDraws(), game.getGameWinnerID(), game.getRoundNumber(), game.getAllPlayersID(), game.getnumberOfRoundsWonByEachPlayer());
+		c.disconnect();
 	}
 	
 	public void displayStats()
 	{
+		Connect c=new Connect();
 		System.out.println("-----------------------------------------------");
 		System.out.println("Total number of Games played: " + c.numberOfGames());
 		System.out.println("Number of Human wins: " + c.numberofHumanWin());
 		System.out.println("Number of AI wins: " + c.numberofAIwin());
 		System.out.printf("Average number of Draws: %.2f\n", c.averageOfDraws());
 		System.out.println("Longest Game: " + c.maxRoundInGame() + " rounds");
+		c.disconnect();
 	}
+	
+	
 }

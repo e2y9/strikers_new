@@ -29,6 +29,7 @@
     <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
 
+<!-- Styling for interface -->
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -112,17 +113,19 @@
 			  <div class="container-fluid">
 				<div class="navbar-header">
 				  <a class="navbar-brand navbar-left" href="http://localhost:7777/toptrumps">
-				  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="80" height="50" alt="Logo">
+				  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" width="140" height="50" alt="Logo">
 				  </a>
 				</div>
 			  </div>
 		</nav>
 		
+		<!-- Display the MarvelLogo and related statistics -->
 		<div class="container">
 			<div class="stats">
+					<!-- Clickable image and text to return to Main Menu (http://localhost:7777/toptrumps/) -->
                     <img class="marvel_jpg" src="https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg" onclick="window.location.href = 'http://localhost:7777/toptrumps';" width="300" height="300" alt="Card image cap">
                     <div class="centered" onclick="window.location.href = 'http://localhost:7777/toptrumps';">Return to Main Menu </div>
-                   
+					
                    <table style="width:100%">
 					  <tr>
 					    <td>Total number of Games played</td>
@@ -149,7 +152,7 @@
          </div>    
 		
 			
-		<footer class="container-fluid text-center">
+		<footer class="container-fluid text-center" onclick="window.location.href = 'https://github.com/e2y9/strikers_new';">
 			<h3>Designed by Strikers</h3>
 			<p>Ali Utku Demir - Ashwin Bhatnagar - Emmet Young - Pranav Dadhich</p>
 		</footer>
@@ -170,15 +173,15 @@
 				
 			}
 			
-			
+			//Connect to database and get statistics
 			function getStats() {
-                var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getStats"); // Request type and URL
+                var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getStats"); // Request and URL
                 if (!xhr) {
                     alert("CORS not supported");
                 }
                 xhr.onload = function(e) {
-                    var responseText = JSON.parse(xhr.response); // the text of the response
-                     for(var i=0; i<responseText.length; i++) {
+                    var responseText = JSON.parse(xhr.response); 
+                     for(var i=0; i<responseText.length; i++) { //loop to get the statistics one by one
                      	withDecimals=responseText[i];
                      	if(parseFloat(responseText[i]) % 1 != 0)
                      	{
